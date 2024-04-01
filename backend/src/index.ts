@@ -9,7 +9,7 @@ import { Category, Product } from "../src/entities";
 const start = async () => {
    await dataSource.initialize();
 
-   // creating products
+   // if no categories, create some categories
    const categories = await Category.find();
    if (categories.length === 0) {
       await Category.save([
@@ -22,7 +22,7 @@ const start = async () => {
       ]);
    }
 
-   // if no products, create some
+   // if no products, create some products
    const products = await Product.find();
    if (products.length === 0) {
 
@@ -65,7 +65,7 @@ const start = async () => {
       backpack.picture =
          "backpack.jpg";
       backpack.price = 59;
-      backpack.quantity =11;
+      backpack.quantity = 11;
       await backpack.save();
    }
 
@@ -85,3 +85,4 @@ const start = async () => {
 };
 
 start();
+
