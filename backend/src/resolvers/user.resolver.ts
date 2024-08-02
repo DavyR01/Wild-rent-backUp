@@ -44,7 +44,7 @@ export default class UserResolver {
          newUser.username = newUserData.username;
          newUser.hashedPassword = await argon2.hash(newUserData.password);
          newUser.role = "user";
-
+         
          await newUser.save();
          return "New user has been created with success";
       } catch (err) {
@@ -63,17 +63,12 @@ export default class UserResolver {
             where: { email: inputUserLogin.email },
          });
          if (!user) throw new Error("User not found");
-         if (!(await argon2.verify(user.hashedPassword, inputUserLogin.password))) {
-            throw new Error("Invalid password");
-         }
+         if (!(await argon2.verify(user.hashedPassword, inputUserLogin.password))) { throw new Error("Invalid password") }
          payload = { email: user.email, role: user.role, username: user.username };
-         const token = jwt.sign(payload, "mysupersecretkey", { expiresIn: '24h' });
+         const token = jwt.sign(payload, "mysupersecretkey", { expiresIn: '12h' });
 
          return token;
-      } catch (error) {
-         console.error("Error while login :", error);
-         throw new Error(error.message);
-      }
+      } catch (error) { throw new Error(error.message) }
    }
 
    @Query(() => Boolean)

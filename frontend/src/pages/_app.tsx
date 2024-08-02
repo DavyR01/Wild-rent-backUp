@@ -23,7 +23,7 @@ const authLink = setContext((_, { headers }) => {
    const token = localStorage.getItem("jwt");
    // return the headers to the context so httpLink can read them
 
-   const timeoutToken = 24 * 60 * 60 * 1000
+   const timeoutToken = 12 * 60 * 60 * 1000
    setTimeout(() => {
       localStorage.removeItem("jwt");
       console.log("Token supprimé du local storage après 24 heures");
