@@ -1,6 +1,7 @@
 import * as argon2 from "argon2";
+import * as jwt from "jsonwebtoken";
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
-import { User, UserInfo } from "../entities/user.entity";
+import { User, UserInfo, UserRoleType } from "../entities/user.entity";
 import { InputUserCreate, InputUserLogin } from "../inputs";
 import { UserService } from "../services/user.service";
 
@@ -56,7 +57,23 @@ export default class UserResolver {
    async loginUser(
       @Arg("inputUserLogin") inputUserLogin: InputUserLogin
    ): Promise<string> {
-      return this.userService.loginUser(inputUserLogin);
+      let payload: { email: string; role: UserRoleType; username: string };
+      try {
+         const user = await User.findOne({
+            where: { email: inputUserLogin.email },
+         });
+         if (!user) throw new Error("User not found");
+         if (!(await argon2.verify(user.hashedPassword, inputUserLogin.password))) {
+            throw new Error("Invalid password");
+         }
+         payload = { email: user.email, role: user.role, username: user.username };
+         const token = jwt.sign(payload, "mysupersecretkey", { expiresIn: '24h' });
+
+         return token;
+      } catch (error) {
+         console.error("Error while login :", error);
+         throw new Error(error.message);
+      }
    }
 
    @Query(() => Boolean)

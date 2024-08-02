@@ -1,8 +1,5 @@
-import * as argon2 from "argon2";
-import * as jwt from "jsonwebtoken";
 
-import { InputUserLogin } from "inputs";
-import { User, UserRoleType } from "../entities/user.entity";
+import { User } from "../entities/user.entity";
 
 export class UserService {
    // async createUser(inputUserCreate: InputUserCreate): Promise<User> {
@@ -26,27 +23,26 @@ export class UserService {
    //       throw new Error("Error while creating new user");
    //    }
    // }
-   
 
-   async loginUser(inputUserLogin: InputUserLogin): Promise<string> {
-      let payload: { email: string; role: UserRoleType; username: string };
-      try {
-         const user = await User.findOne({
-            where: { email: inputUserLogin.email },
-         });
-         if (!user) throw new Error("User not found");
-         if (!(await argon2.verify(user.hashedPassword, inputUserLogin.password))) {
-            throw new Error("Invalid password");
-         }
-         payload = { email: user.email, role: user.role, username: user.username };
-         const token = jwt.sign(payload, "mysupersecretkey", { expiresIn: '24h' });
+   // async loginUser(inputUserLogin: InputUserLogin): Promise<string> {
+   //    let payload: { email: string; role: UserRoleType; username: string };
+   //    try {
+   //       const user = await User.findOne({
+   //          where: { email: inputUserLogin.email },
+   //       });
+   //       if (!user) throw new Error("User not found");
+   //       if (!(await argon2.verify(user.hashedPassword, inputUserLogin.password))) {
+   //          throw new Error("Invalid password");
+   //       }
+   //       payload = { email: user.email, role: user.role, username: user.username };
+   //       const token = jwt.sign(payload, "mysupersecretkey", { expiresIn: '24h' });
 
-         return token;
-      } catch (error) {
-         console.error("Error while login :", error);
-         throw new Error(error.message);
-      }
-   }
+   //       return token;
+   //    } catch (error) {
+   //       console.error("Error while login :", error);
+   //       throw new Error(error.message);
+   //    }
+   // }
 
    async checkUserExistence(username: string, email: string): Promise<boolean> {
       const userByUsername = await User.findOne({ where: { username } });
