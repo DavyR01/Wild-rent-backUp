@@ -1,34 +1,32 @@
 import * as argon2 from "argon2";
 import * as jwt from "jsonwebtoken";
 
-import { InputUserCreate, InputUserLogin } from "inputs";
+import { InputUserLogin } from "inputs";
 import { User, UserRoleType } from "../entities/user.entity";
 
 export class UserService {
-   async createUser(inputUserCreate: InputUserCreate): Promise<User> {
-      try {
-         const existingUser = await User.findOne({
-            where: [
-               { email: inputUserCreate.email },
-               { username: inputUserCreate.username },
-            ],
-         });
+   // async createUser(inputUserCreate: InputUserCreate): Promise<User> {
+   //    try {
+   //       const existingUser = await User.findOne({
+   //          where: [
+   //             { email: inputUserCreate.email },
+   //             { username: inputUserCreate.username },
+   //          ],
+   //       });
+   //       if (existingUser) throw new Error("User with this email or username already exists");
+   //       const newUser = new User();
+   //       newUser.email = inputUserCreate.email;
+   //       newUser.username = inputUserCreate.username;
+   //       newUser.hashedPassword = await argon2.hash(inputUserCreate.password);
+   //       newUser.role = "user";
 
-         if (existingUser) {
-            throw new Error("User with this email or username already exists");
-         }
-
-         const newUser = new User();
-         newUser.email = inputUserCreate.email;
-         newUser.username = inputUserCreate.username;
-         newUser.hashedPassword = await argon2.hash(inputUserCreate.password);
-         newUser.role = "user";
-         return await newUser.save();
-      } catch (error) {
-         console.error("Error while creating new user :", error);
-         throw new Error("Error while creating new user");
-      }
-   }
+   //       return await newUser.save();
+   //    } catch (error) {
+   //       console.error("Error while creating new user :", error);
+   //       throw new Error("Error while creating new user");
+   //    }
+   // }
+   
 
    async loginUser(inputUserLogin: InputUserLogin): Promise<string> {
       let payload: { email: string; role: UserRoleType; username: string };
@@ -36,20 +34,11 @@ export class UserService {
          const user = await User.findOne({
             where: { email: inputUserLogin.email },
          });
-         if (!user) {
-            throw new Error("User not found");
-         }
-
-         if (
-            !(await argon2.verify(user.hashedPassword, inputUserLogin.password))
-         ) {
+         if (!user) throw new Error("User not found");
+         if (!(await argon2.verify(user.hashedPassword, inputUserLogin.password))) {
             throw new Error("Invalid password");
          }
-
-         // Transmission du payload dans jwt.sign et réception du payload dans jwt.verify
          payload = { email: user.email, role: user.role, username: user.username };
-
-         // Signature du token avec une clé secrète
          const token = jwt.sign(payload, "mysupersecretkey", { expiresIn: '24h' });
 
          return token;
