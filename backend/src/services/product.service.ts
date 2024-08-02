@@ -57,7 +57,7 @@ export default class ProductService {
     return products;
   }
 
-  async create(data: InputCreateProduct) {
+  async create(data: InputCreateProduct, _ctx: any) {
     const categoryToLink = await new CategoryService().find(
       // The unary (+) : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Unary_plus
       +data.category

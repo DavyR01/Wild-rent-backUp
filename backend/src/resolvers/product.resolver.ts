@@ -37,9 +37,9 @@ export default class ProductResolver {
    @Mutation(() => Product)
    async addProduct(
       @Arg("infos") infos: InputCreateProduct,
-      // @Ctx() ctx: { email: string }
+      @Ctx() ctx: { email: string }
    ) {
-      const newProduct = await this.productService.create(infos);
+      const newProduct = await this.productService.create(infos, ctx);
       return newProduct;
    }
 
