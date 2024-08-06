@@ -8,8 +8,19 @@ jobs:
     steps:
       - name: ⚙️ Check out code
         uses: actions/checkout@v2
+      # - name: Set environment variables for tests
+      #   run: |
+      #     if [ "${GITHUB_REF}" == "refs/heads/dev" ]; then
+      #       echo "IMAGE_TAG=dev" >> $GITHUB_ENV
+      #     elif [ "${GITHUB_REF}" == "refs/heads/staging" ]; then
+      #       echo "IMAGE_TAG=staging" >> $GITHUB_ENV
+      #     elif [ "${GITHUB_REF}" == "refs/heads/main" ]; then
+      #       echo "IMAGE_TAG=main" >> $GITHUB_ENV
+      #     fi
       - name: ⚙️ Run test e2e
         run: docker compose -f docker-compose.e2e.yml up --build --exit-code-from e2e
+      #   env:
+      #      IMAGE_TAG: ${{ env.IMAGE_TAG } }
 #   front-test:
 #     runs-on: ubuntu-latest
 #     steps:
@@ -19,9 +30,18 @@ jobs:
 #         run: cd frontend && pnpm run test
   docker:
     needs: test-e2e
-    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/stagingtest' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
+      - name: Set environment variables
+        run: |
+            if [ "${GITHUB_REF}" == "refs/heads/dev" ]; then
+               echo "IMAGE_TAG=dev" >> $GITHUB_ENV
+            elif [ "${GITHUB_REF}" == "refs/heads/stagingtest" ]; then
+               echo "IMAGE_TAG=stagingtest" >> $GITHUB_ENV
+            elif [ "${GITHUB_REF}" == "refs/heads/main" ]; then
+               echo "IMAGE_TAG=main" >> $GITHUB_ENV
+            fi
       - name: 🔧 Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: 🔧 Set up Docker Buildx
@@ -37,11 +57,15 @@ jobs:
           push: true
           context: "{{defaultContext}}:frontend"
           file: "Dockerfile.prod"
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/wildrent-front:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/wildrent-front:${{ env.IMAGE_TAG }}
+        env:
+          IMAGE_TAG: ${{env.IMAGE_TAG}}
       - name: 🗂 Build and push backend
         uses: docker/build-push-action@v4
         with:
           push: true
           context: "{{defaultContext}}:backend"
           file: "Dockerfile.prod"
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/wildrent-back:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/wildrent-back:${{ env.IMAGE_TAG }}
+        env:
+          IMAGE_TAG: ${{env.IMAGE_TAG}}
