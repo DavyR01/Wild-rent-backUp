@@ -62,6 +62,8 @@ const start = async () => {
     // A chaque requête exécuté, la fonction de contexte va s'enclencher
     context: async ({ req }) => {
       const token = req.headers.authorization?.split("Bearer ")[1];
+      console.log("token : ", token);
+      
 
       if (token) {
         try {
