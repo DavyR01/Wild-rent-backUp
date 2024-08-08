@@ -67,6 +67,9 @@ export default class UserResolver {
          payload = { email: user.email, role: user.role, username: user.username };
          const token = jwt.sign(payload, "mysupersecretkey", { expiresIn: '12h' });
 
+         console.log("-------- Token in user.resolver.ts ------- : ", token);
+         console.log("------ Payload in user.resolver.ts ------ : ", payload);
+
          return token;
       } catch (error) { throw new Error(error.message) }
    }
