@@ -33,18 +33,15 @@ export default class UserResolver {
    ): Promise<string> {
       try {
          const existingUser = await User.findOne({
-            where: [
-               { email: newUserData.email },
-               { username: newUserData.username },
-            ],
+            where: [{ email: newUserData.email }, { username: newUserData.username }],
          });
          if (existingUser) throw new Error("User with this email or username already exists");
-         const newUser = new User();
-         newUser.email = newUserData.email;
-         newUser.username = newUserData.username;
-         newUser.hashedPassword = await argon2.hash(newUserData.password);
-         newUser.role = "user";
-         
+         const newUser = User.create({
+            email: newUserData.email,
+            username: newUserData.username,
+            hashedPassword: await argon2.hash(newUserData.password),
+            role: "user",
+         })
          await newUser.save();
          return "New user has been created with success";
       } catch (err) {
