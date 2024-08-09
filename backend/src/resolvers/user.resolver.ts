@@ -33,7 +33,7 @@ export default class UserResolver {
    ): Promise<string> {
       try {
          const existingUser = await User.findOne({
-            where: [{ email: newUserData.email }, { username: newUserData.username }],
+            where: [{ email: newUserData.email }],
          });
          if (existingUser) throw new Error("User with this email or username already exists");
          const newUser = User.create({
