@@ -85,10 +85,11 @@ const RegisterPage = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div>
-              <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+              <label htmlFor="username" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                 Nom d&apos;utilisateur
               </label>
               <input
+                id="username"
                 type="text"
                 {...register("username", {
                   required: "Le nom d'utilisateur est requis",
@@ -119,10 +120,11 @@ const RegisterPage = () => {
               )}
             </div>
             <div>
-              <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+              <label htmlFor="email" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                 E-mail
               </label>
               <input
+              id="email"
                 type="email"
                 {...register("email", {
                   required: "Le mail est requis",
@@ -147,11 +149,12 @@ const RegisterPage = () => {
               )}
             </div>
             <div>
-              <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+              <label htmlFor="password1" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                 Mot de passe
               </label>
               <div className="relative">
                 <input
+                id="password1"
                   type={showPassword ? "text" : "password"}
                   {...register("password", {
                     required: "Le mot de passe est requis",
@@ -187,11 +190,12 @@ const RegisterPage = () => {
               )}
             </div>
             <div>
-              <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                Confirmez le mot de passe
+              <label htmlFor="confirmPassword" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                Confirmez le mot de pass
               </label>
               <div className="relative">
                 <input
+                id="confirmPassword"
                   type={showPassword ? "text" : "password"}
                   {...register("confirmPassword", {
                     required: "La confirmation de mot de passe est requise",
