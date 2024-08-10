@@ -5,10 +5,25 @@ import { User, UserInfo, UserRoleType } from "../entities/user.entity";
 import { InputUserCreate, InputUserLogin } from "../inputs";
 import { UserService } from "../services/user.service";
 
+// class PasswordValidationError extends Error {
+//    constructor(message: string) {
+//      super(message);
+//      this.name = "PasswordValidationError";
+//    }
+//  }
+
 
 @Resolver()
 export default class UserResolver {
    private userService = new UserService();
+
+   private validatePassword(password: string): void {
+      const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
+      if (!regex.test(password)) {
+         throw new Error("Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial !!!!!!!!!!");
+         //   throw new PasswordValidationError("")
+      }
+   }
 
    @Authorized("admin")
    @Query(() => [User])
@@ -36,6 +51,7 @@ export default class UserResolver {
             where: [{ email: newUserData.email }],
          });
          if (existingUser) throw new Error("User with this email or username already exists");
+         this.validatePassword(newUserData.password)
          const newUser = User.create({
             email: newUserData.email,
             username: newUserData.username,
@@ -45,6 +61,9 @@ export default class UserResolver {
          await newUser.save();
          return "New user has been created with success";
       } catch (err) {
+         // if (err instanceof PasswordValidationError) {
+         //       throw new Error(err.message);
+         //     } else {
          console.error("Error while creating new user :", err);
          throw new Error("Error while creating new user");
       }
