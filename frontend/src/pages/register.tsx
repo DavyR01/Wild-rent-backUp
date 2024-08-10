@@ -181,7 +181,7 @@ const RegisterPage = () => {
                         /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/.test(
                           value,
                         ) ||
-                        "Le mot de passe doit contenir au moins 8 caractères, au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.",
+                        "Erreur validation : Le mot de passe doit contenir au moins 8 caractères, au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.",
                     },
                   })}
                   placeholder="••••••••"
@@ -264,7 +264,7 @@ const RegisterPage = () => {
             )}
             {mutationError && (
               <div
-                className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-green-700"
+                className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
                 role="alert"
               >
                 <strong className="font-bold">Erreur: </strong>
