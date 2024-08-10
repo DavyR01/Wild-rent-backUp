@@ -32,6 +32,7 @@
    "devDependencies": {
       "@types/cors": "^2.8.15",
       "@types/express": "^4.17.20",
+      "apollo-server-errors": "^3.3.1",
       "ts-node": "^10.9.2"
    }
 }

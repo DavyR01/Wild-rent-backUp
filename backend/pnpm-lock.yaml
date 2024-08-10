@@ -61,6 +61,9 @@ devDependencies:
   '@types/express':
     specifier: ^4.17.20
     version: 4.17.21
+  apollo-server-errors:
+    specifier: ^3.3.1
+    version: 3.3.1(graphql@16.8.1)
   ts-node:
     specifier: ^10.9.2
     version: 10.9.2(@types/node@20.11.13)(typescript@5.3.3)
@@ -648,6 +651,16 @@ packages:
       normalize-path: 3.0.0
       picomatch: 2.3.1
     dev: false
+
+  /apollo-server-errors@3.3.1(graphql@16.8.1):
+    resolution: {integrity: sha512-xnZJ5QWs6FixHICXHxUfm+ZWqqxrNuPlQ+kj5m6RtEgIpekOPssH/SD9gf2B4HuWV0QozorrygwZnux8POvyPA==}
+    engines: {node: '>=12.0'}
+    deprecated: The `apollo-server-errors` package is part of Apollo Server v2 and v3, which are now deprecated (end-of-life October 22nd 2023 and October 22nd 2024, respectively). This package's functionality is now found in the `@apollo/server` package. See https://www.apollographql.com/docs/apollo-server/previous-versions/ for more details.
+    peerDependencies:
+      graphql: ^15.3.0 || ^16.0.0
+    dependencies:
+      graphql: 16.8.1
+    dev: true
 
   /app-root-path@3.1.0:
     resolution: {integrity: sha512-biN3PwB2gUtjaYy/isrU3aNWI5w+fAfvHkSvCKeQGxhmYpwKFUxudR3Yya+KqVRHBmEDYh+/lTozYCFbmzX4nA==}
@@ -1244,7 +1257,6 @@ packages:
   /graphql@16.8.1:
     resolution: {integrity: sha512-59LZHPdGZVh695Ud9lRzPBVTtlX9ZCV150Er2W43ro37wVof0ctenSaskPPjN7lVTIN8mSZt8PHUNKZuNQUuxw==}
     engines: {node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0}
-    dev: false
 
   /has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}

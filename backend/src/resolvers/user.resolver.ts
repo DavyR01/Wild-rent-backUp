@@ -1,3 +1,4 @@
+import { ApolloError } from "apollo-server-errors";
 import * as argon2 from "argon2";
 import * as jwt from "jsonwebtoken";
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
@@ -50,7 +51,8 @@ export default class UserResolver {
          const existingUser = await User.findOne({
             where: [{ email: newUserData.email }],
          });
-         if (existingUser) throw new Error("User with this email or username already exists");
+         if (existingUser) throw new ApolloError("Ce mail existe déjà, veuillez choisir un autre mail !!");
+
          this.validatePassword(newUserData.password)
          const newUser = User.create({
             email: newUserData.email,
@@ -61,11 +63,12 @@ export default class UserResolver {
          await newUser.save();
          return "New user has been created with success";
       } catch (err) {
-         // if (err instanceof PasswordValidationError) {
-         //       throw new Error(err.message);
-         //     } else {
-         console.error("Error while creating new user :", err);
-         throw new Error("Error while creating new user");
+         if (err instanceof ApolloError) {
+            throw err
+         } else {
+            console.error("Error while creating new user :", err);
+            throw new Error("Error while creating new user");
+         }
       }
    }
 
