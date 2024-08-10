@@ -5,7 +5,7 @@ import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { User, UserInfo, UserRoleType } from "../entities/user.entity";
 import { InputUserCreate, InputUserLogin } from "../inputs";
 import { UserService } from "../services/user.service";
-import { validateEmail, validateExistingUser, validatePassword, validateUsername } from "../validators/registerUser.validator";
+import { validateEmail, validateExistingUser, validatePassword, validateUsername } from "../validators/authUser.validator-front";
 
 // class PasswordValidationError extends Error {
 //    constructor(message: string) {

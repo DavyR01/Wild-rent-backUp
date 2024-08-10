@@ -8,7 +8,7 @@ import { useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { inputRegisterUser } from "types/inputRegisterUser";
-import { validateUsername } from "validators/authValidator";
+import { validateConfirmPassword, validateEmail, validatePassword, validateUsername } from "validators/authUser.validator-back";
 
 const RegisterPage = () => {
    const router = useRouter();
@@ -106,7 +106,6 @@ const RegisterPage = () => {
                         id="username"
                         type="text"
                         {...register("username", {
-                           required: "Le nom d'utilisateur est requis",
                            validate: validateUsername,
                         })}
                         className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
@@ -134,11 +133,7 @@ const RegisterPage = () => {
                         id="email"
                         type="email"
                         {...register("email", {
-                           required: "Le mail est requis",
-                           pattern: {
-                              value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                              message: "Veuillez saisir une adresse e-mail valide",
-                           },
+                           validate: validateEmail
                         })}
                         className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                         placeholder="name@domain.com"
@@ -159,22 +154,15 @@ const RegisterPage = () => {
 
                   {/* Mot de passe  */}
                   <div>
-                     <label htmlFor="password1" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                     <label htmlFor="password" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                         Mot de passe
                      </label>
                      <div className="relative">
                         <input
-                           id="password1"
+                           id="password"
                            type={showPassword ? "text" : "password"}
                            {...register("password", {
-                              required: "Le mot de passe est requis",
-                              validate: {
-                                 regex: (value) =>
-                                    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/.test(
-                                       value,
-                                    ) ||
-                                    "Erreur validation : Le mot de passe doit contenir au moins 8 caractères, au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.",
-                              },
+                              validate: validatePassword
                            })}
                            placeholder="••••••••"
                            className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
@@ -211,7 +199,7 @@ const RegisterPage = () => {
                            id="confirmPassword"
                            type={showPassword ? "text" : "password"}
                            {...register("confirmPassword", {
-                              required: "La confirmation de mot de passe est requise",
+                              validate: validateConfirmPassword
                            })}
                            placeholder="••••••••"
                            className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
