@@ -24,6 +24,7 @@ const RegisterPage = () => {
     register,
     handleSubmit,
     formState: { errors },
+    watch
   } = useForm<inputRegisterUser>();
   const [createUser, { loading, error: mutationError }] =
     useMutation(CREATE_USER);
@@ -35,6 +36,7 @@ const RegisterPage = () => {
   const onSubmit: SubmitHandler<inputRegisterUser> = async (data) => {
     if (data.password !== data.confirmPassword) {
       setErrorSamePassword("Les mots de passe ne correspondent pas");
+      return
     } else {
       setErrorSamePassword("")
     }
@@ -62,8 +64,12 @@ const RegisterPage = () => {
 
   const eyeIcon = showPassword ? <HiEyeOff /> : <HiEye />;
 
-  const handleInputMailChange = () => {
-    setErrorSamePassword("")
+  const handleInputPasswordChange = (password: string, confirmPassword: string) => {
+    if (password !== confirmPassword) {
+      setErrorSamePassword("Les mots de passe ne correspondent pas");
+    } else {
+      setErrorSamePassword("")
+    }
   }
 
   return (
@@ -179,10 +185,11 @@ const RegisterPage = () => {
                           value,
                         ) ||
                         "Le mot de passe doit contenir au moins 8 caractères, au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.",
-                    },
-                  })}
-                  placeholder="••••••••"
-                  className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                      },
+                    })}
+                    placeholder="••••••••"
+                    className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                    onChange={(e)=> handleInputPasswordChange(e.target.value, watch('confirmPassword'),)}
                 />
                 <button
                   type="button"
@@ -219,6 +226,7 @@ const RegisterPage = () => {
                   })}
                   placeholder="••••••••"
                   className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                  onChange={(e)=> handleInputPasswordChange(watch('password'), e.target.value)}
                 />
               </div>
 
@@ -259,7 +267,7 @@ const RegisterPage = () => {
             )}
             {mutationError && (
               <div
-                className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
+                className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-green-700"
                 role="alert"
               >
                 <strong className="font-bold">Erreur: </strong>
