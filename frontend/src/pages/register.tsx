@@ -8,7 +8,7 @@ import { useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { inputRegisterUser } from "types/inputRegisterUser";
-import { validateConfirmPassword, validateEmail, validatePassword, validateUsername } from "validators/authUser.validator-back";
+import { validateConfirmPassword, validateEmail, validatePassword, validateUsername } from "validators/authUser.validator-front";
 
 const RegisterPage = () => {
    const router = useRouter();
@@ -221,7 +221,7 @@ const RegisterPage = () => {
                      )}
                      {errorSamePassword && formSubmitted && (
                         <div
-                           className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
+                           className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-green-700"
                            role="alert"
                         >
                            <strong className="font-bold">Erreur: </strong>
@@ -244,7 +244,7 @@ const RegisterPage = () => {
                   )}
                   {mutationError && (
                      <div
-                        className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
+                        className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-blue-700"
                         role="alert"
                      >
                         <strong className="font-bold">Erreur: </strong>
