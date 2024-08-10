@@ -110,10 +110,11 @@ const LoginPage = () => {
                 Se connecter à votre compte
               </h1>
             </div>
-            <form
-              className="space-y-4 md:space-y-6"
-              onSubmit={handleSubmit(onSubmit)}
-            >
+
+
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(onSubmit)}>
+
+              {/* E-mail */}
               <div>
                 <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                   E-mail
@@ -130,6 +131,8 @@ const LoginPage = () => {
                   className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                   placeholder="name@domain.com"
                 />
+
+                {/* Gestion des erreurs e-mails */}
                 {errors.email && (
                   <div
                     className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
@@ -142,6 +145,8 @@ const LoginPage = () => {
                   </div>
                 )}
               </div>
+
+              {/* Mot de passe */}
               <div>
                 <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                   Mot de passe
@@ -167,6 +172,8 @@ const LoginPage = () => {
                   >
                     {eyeIcon}
                   </button>
+
+                  {/* Gestion des erreurs mot de passe */}
                   {errors.password && (
                     <div
                       className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
@@ -180,6 +187,8 @@ const LoginPage = () => {
                   )}
                 </div>
               </div>
+
+
               <div className="flex flex-wrap items-center justify-between">
                 <div className="flex items-start">
                   <div className="flex h-5 items-center">
@@ -197,6 +206,8 @@ const LoginPage = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Bouton Se Connecter */}
               <button
                 type="submit"
                 className="w-full rounded-lg bg-indigo-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
@@ -213,6 +224,8 @@ const LoginPage = () => {
                 </Link>
               </p>
             </form>
+
+            {/* Gestion des erreurs globales */}
             {errorMessage && (
               <div
                 className="relative mt-2 flex rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
@@ -222,6 +235,8 @@ const LoginPage = () => {
                 <span className="block sm:inline">{errorMessage}</span>
               </div>
             )}
+
+
           </div>
         </div>
       </div>
