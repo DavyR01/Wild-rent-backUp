@@ -4,6 +4,7 @@
    "description": "",
    "main": "index.js",
    "scripts": {
+      "ok": "docker compose -f docker-compose.yml up",
       "start": "docker compose -f docker-compose.yml up --build",
       "start-d": "docker compose -f docker-compose.yml up --build -d",
       "startprod": "docker compose -f docker-compose.prod.yml up --build",
