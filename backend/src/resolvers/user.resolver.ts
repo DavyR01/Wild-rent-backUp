@@ -5,6 +5,7 @@ import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { User, UserInfo, UserRoleType } from "../entities/user.entity";
 import { InputUserCreate, InputUserLogin } from "../inputs";
 import { UserService } from "../services/user.service";
+import { validateEmail, validateExistingUser, validatePassword, validateUsername } from "../validators/registerUser.validate";
 
 // class PasswordValidationError extends Error {
 //    constructor(message: string) {
@@ -44,10 +45,10 @@ export default class UserResolver {
             where: [{ email: newUserData.email }],
          });
 
-         this.validateEmail(newUserData.email)
-         this.validatePassword(newUserData.password)
-         this.validateUsername(newUserData.username)
-         this.validateExistingUser(existingUser)
+         validateEmail(newUserData.email)
+         validatePassword(newUserData.password)
+         validateUsername(newUserData.username)
+         validateExistingUser(existingUser)
 
          const newUser = User.create({
             email: newUserData.email,
@@ -116,35 +117,6 @@ export default class UserResolver {
          return { ...ctx, isLoggedIn: true };
       } else {
          return { isLoggedIn: false };
-      }
-   }
-
-
-
-   private validateEmail(email: string): void {
-      const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
-      if (!regex.test(email)) throw new ApolloError("Apollo Error : Veuillez saisir une adresse mail valide.");
-   }
-
-   private validateExistingUser(existingUser: User | null): void {
-      if (existingUser) throw new ApolloError("Apollo Error : Ce mail existe déjà, veuillez choisir un autre mail.");
-   }
-
-   private validatePassword(password: string): void {
-      const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
-      if (!regex.test(password)) {
-         throw new ApolloError("Apollo Error : Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.");
-         //   throw new PasswordValidationError("")
-      }
-   }
-
-   private validateUsername(username: string): void {
-      const regex = /^[a-zA-Z0-9-_]+$/;
-
-      if (username.length < 5) {
-         throw new ApolloError("Apollo Error : Le nom d'utilisateur doit contenir au moins 5 caractères");
-      } else if (!regex.test(username)) {
-         throw new ApolloError("Apollo Error : Le nom d'utilisateur ne peut contenir que des lettres, des chiffres et seuls les (-) et (_) sont acceptés.");
       }
    }
 }
