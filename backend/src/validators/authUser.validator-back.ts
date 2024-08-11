@@ -6,6 +6,13 @@ export function validateEmail(email: string): void {
    if (!regex.test(email)) throw new ApolloError("Apollo Error : Veuillez saisir une adresse mail valide.");
 }
 
+// export function validateExistingUser(existingUser: User | null): string | undefined {
+//    if (existingUser) {
+//       return "Ce mail existe déjà, veuillez choisir un autre mail.";
+//    }
+//    return undefined;
+// }
+
 export function validateExistingUser(existingUser: User | null): void {
    if (existingUser) throw new ApolloError("Apollo Error : Ce mail existe déjà, veuillez choisir un autre mail.");
 }

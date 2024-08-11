@@ -1,3 +1,4 @@
+// import { User } from "types/user";
 
 export const validateUsername = (username: string): string | undefined => {
    if (!username) {
@@ -49,3 +50,10 @@ export const validateConfirmPassword = (confirmPassword: string): string | undef
    }
 }
 
+
+// export function validateExistingUser(existingUser: User | null): string | undefined {
+//    if (existingUser) {
+//       return "Ce mail existe déjà, veuillez choisir un autre mail.";
+//    }
+//    return undefined;
+// }

@@ -1,21 +1,21 @@
 import { gql } from "@apollo/client";
 
 export type ProductType = {
-  id: number;
-  name: string;
-  description_short: string;
-  description_long: string;
-  picture: string[];
-  price_fixed: number;
-  price_daily: number;
-  discount?: number;
-  quantity: number;
-  created_at: string;
-  updated_at: string;
-  category: {
-    id: number;
-    name: string;
-  };
+   id: number;
+   name: string;
+   description_short: string;
+   description_long: string;
+   picture: string[];
+   price_fixed: number;
+   price_daily: number;
+   discount?: number;
+   quantity: number;
+   created_at: string;
+   updated_at: string;
+   category: {
+      id: number;
+      name: string;
+   };
 };
 
 export const GET_PRODUCTS = gql`
@@ -140,3 +140,12 @@ export const WHO_AM_I = gql`
     }
   }
 `;
+
+
+export const CHECK_USER_EXISTENCE = gql`
+query Query($email: String!, $username: String!) {
+   checkUserExistence(email: $email, username: $username)
+ }
+`
+
+

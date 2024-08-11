@@ -9,6 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { inputRegisterUser } from "types/inputRegisterUser";
 import { validateConfirmPassword, validateEmail, validatePassword, validateUsername } from "validators/authUser.validator-front";
+// import { validateExistingUser } from "../../../backend/src/validators/authUser.validator-backk";
 
 const RegisterPage = () => {
    const router = useRouter();
@@ -17,6 +18,9 @@ const RegisterPage = () => {
    const [errorSamePassword, setErrorSamePassword] = useState("");
    const [formSubmitted, setFormSubmitted] = useState(false);
    const authInfo = useContext(UserContext);
+   // const { refetch: checkEmailExists } = useQuery(CHECK_USER_EXISTENCE, {
+   //    skip: true, // Skip the initial query
+   // });
 
    if (authInfo.isLoggedIn) {
       router.push("/");
@@ -40,6 +44,16 @@ const RegisterPage = () => {
       }
 
       try {
+         // const { data: existingUserData } = await checkEmailExists({
+         //    variables: { email: data.email }
+         // });
+   
+         // const existingUser = existingUserData?.user;
+         // const validationError = validateExistingUser(existingUser);
+         // if (validationError) {
+         //    setErrorMessage(validationError);
+         //    return;
+         // }
          await createUser({
             variables: {
                newUserData: {
@@ -54,6 +68,7 @@ const RegisterPage = () => {
          router.push("/login");
       } catch (err: any) {
          const apolloError = err as ApolloError;
+         // setErrorMessage(apolloError.message ?? "Une erreur s'est produite lors de la création de l'utilisateur");
          apolloError.message ?? setErrorMessage("Une erreur s'est produite lors de la création de l'utilisateur");
 
          console.error("Catch Error : " + err);
@@ -69,6 +84,10 @@ const RegisterPage = () => {
          setErrorSamePassword("")
       }
    }
+
+   // const handleInputMailChange = () => {
+      
+   // }
 
    return (
       <div className="flex justify-center">
