@@ -35,6 +35,8 @@ const RegisterPage = () => {
 
    const onSubmit: SubmitHandler<inputRegisterUser> = async (data) => {
       setFormSubmitted(true)
+      setErrorMessage("")
+      
 
       if (data.password !== data.confirmPassword) {
          setErrorSamePassword("Les mots de passe ne correspondent pas");
@@ -68,8 +70,8 @@ const RegisterPage = () => {
          router.push("/login");
       } catch (err: any) {
          const apolloError = err as ApolloError;
-         // setErrorMessage(apolloError.message ?? "Une erreur s'est produite lors de la création de l'utilisateur");
-         apolloError.message ?? setErrorMessage("Une erreur s'est produite lors de la création de l'utilisateur");
+         setErrorMessage(apolloError.message ?? "Une erreur s'est produite lors de la création de l'utilisateur");
+         // apolloError.message ?? setErrorMessage("Une erreur s'est produite lors de la création de l'utilisateur");
 
          console.error("Catch Error : " + err);
       }
@@ -261,7 +263,7 @@ const RegisterPage = () => {
                         <span className="block sm:inline">{errorMessage}</span>
                      </div>
                   )}
-                  {mutationError && (
+                  {/* {mutationError && (
                      <div
                         className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-blue-700"
                         role="alert"
@@ -269,7 +271,7 @@ const RegisterPage = () => {
                         <strong className="font-bold">Erreur: </strong>
                         <span className="block sm:inline">{mutationError.message}</span>
                      </div>
-                  )}
+                  )} */}
 
                   {/* Bouton s'enregistrer */}
                   <button
