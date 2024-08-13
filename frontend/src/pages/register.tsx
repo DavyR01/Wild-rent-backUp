@@ -1,4 +1,5 @@
 import { ApolloError, useMutation } from "@apollo/client";
+import ErrorsValidations from "components/ui/ErrorsValidations";
 import { UserContext } from "contexts/UserContext";
 import { CREATE_USER } from "lib/graphql/mutations";
 import Image from "next/image";
@@ -36,7 +37,7 @@ const RegisterPage = () => {
    const onSubmit: SubmitHandler<inputRegisterUser> = async (data) => {
       setFormSubmitted(true)
       setErrorMessage("")
-      
+
 
       if (data.password !== data.confirmPassword) {
          setErrorSamePassword("Les mots de passe ne correspondent pas");
@@ -49,7 +50,7 @@ const RegisterPage = () => {
          // const { data: existingUserData } = await checkEmailExists({
          //    variables: { email: data.email }
          // });
-   
+
          // const existingUser = existingUserData?.user;
          // const validationError = validateExistingUser(existingUser);
          // if (validationError) {
@@ -70,11 +71,11 @@ const RegisterPage = () => {
          router.push("/login");
       } catch (err: any) {
          // if (err instanceof ApolloError) {
-         //    throw err
+            // throw err
          // }
          const apolloError = err as ApolloError;
-         setErrorMessage(apolloError.message ?? "Une erreur s'est produite lors de la création de l'utilisateur");
-         // apolloError.message ?? setErrorMessage("Une erreur s'est produite lors de la création de l'utilisateur");
+         // setErrorMessage(apolloError.message ?? "Une erreur s'est produite lors de la création de l'utilisateur");
+         apolloError.message ?? setErrorMessage("Une erreur s'est produite lors de la création de l'utilisateur");
 
          console.error("Catch Error : " + err);
       }
@@ -91,7 +92,7 @@ const RegisterPage = () => {
    }
 
    // const handleInputMailChange = () => {
-      
+
    // }
 
    return (
@@ -116,7 +117,6 @@ const RegisterPage = () => {
                </div>
 
 
-
                <form
                   className="space-y-4 md:space-y-6"
                   onSubmit={handleSubmit(onSubmit)}
@@ -135,17 +135,7 @@ const RegisterPage = () => {
                         className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                         placeholder="Votre nom d'utilisateur"
                      />
-                     {errors.username && (
-                        <div
-                           className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
-                           role="alert"
-                        >
-                           <strong className="font-bold">Erreur: </strong>
-                           <span className="block sm:inline">
-                              {errors.username.message}
-                           </span>
-                        </div>
-                     )}
+                     {errors.username && <ErrorsValidations message={errors.username.message!} />}
                   </div>
 
                   {/* E-mail */}
@@ -163,17 +153,7 @@ const RegisterPage = () => {
                         placeholder="name@domain.com"
                      //  onChange={handleInputMailChange}
                      />
-                     {errors.email && (
-                        <div
-                           className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
-                           role="alert"
-                        >
-                           <strong className="font-bold">Erreur: </strong>
-                           <span className="block sm:inline">
-                              {errors.email.message}
-                           </span>
-                        </div>
-                     )}
+                     {errors.email && <ErrorsValidations message={errors.email.message!} />}
                   </div>
 
                   {/* Mot de passe  */}
@@ -200,17 +180,7 @@ const RegisterPage = () => {
                            {eyeIcon}
                         </button>
                      </div>
-                     {errors.password && (
-                        <div
-                           className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
-                           role="alert"
-                        >
-                           <strong className="font-bold">Erreur: </strong>
-                           <span className="block sm:inline">
-                              {errors.password.message}
-                           </span>
-                        </div>
-                     )}
+                     {errors.password && <ErrorsValidations message={errors.password.message!} />}
                   </div>
 
                   {/* Confirmer le mot de passe */}
@@ -232,49 +202,15 @@ const RegisterPage = () => {
                      </div>
 
                      {/* Gestion erreurs Mot de passe */}
-                     {errors.confirmPassword && (
-                        <div
-                           className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
-                           role="alert"
-                        >
-                           <strong className="font-bold">Erreur: </strong>
-                           <span className="block sm:inline">
-                              {errors.confirmPassword.message}
-                           </span>
-                        </div>
-                     )}
-                     {errorSamePassword && formSubmitted && (
-                        <div
-                           className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-green-700"
-                           role="alert"
-                        >
-                           <strong className="font-bold">Erreur: </strong>
-                           <span className="block sm:inline">
-                              {errorSamePassword}
-                           </span>
-                        </div>
-                     )}
+                     {errors.confirmPassword && <ErrorsValidations message={errors.confirmPassword.message!} />}
+
+                     {errorSamePassword && formSubmitted && <ErrorsValidations message={errorSamePassword} />}
                   </div>
 
                   {/* Gestion erreurs globales formulaire */}
-                  {errorMessage && (
-                     <div
-                        className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
-                        role="alert"
-                     >
-                        <strong className="font-bold">Erreur: </strong>
-                        <span className="block sm:inline">{errorMessage}</span>
-                     </div>
-                  )}
-                  {/* {mutationError && (
-                     <div
-                        className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-blue-700"
-                        role="alert"
-                     >
-                        <strong className="font-bold">Erreur: </strong>
-                        <span className="block sm:inline">{mutationError.message}</span>
-                     </div>
-                  )} */}
+                  {errorMessage && <ErrorsValidations message={errorMessage} />}
+
+                  {mutationError && <ErrorsValidations message={mutationError.message} />}
 
                   {/* Bouton s'enregistrer */}
                   <button
