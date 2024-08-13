@@ -69,6 +69,9 @@ const RegisterPage = () => {
          localStorage.setItem("registrationSuccess", "true");
          router.push("/login");
       } catch (err: any) {
+         // if (err instanceof ApolloError) {
+         //    throw err
+         // }
          const apolloError = err as ApolloError;
          setErrorMessage(apolloError.message ?? "Une erreur s'est produite lors de la création de l'utilisateur");
          // apolloError.message ?? setErrorMessage("Une erreur s'est produite lors de la création de l'utilisateur");

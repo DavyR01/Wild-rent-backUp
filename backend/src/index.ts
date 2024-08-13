@@ -42,6 +42,7 @@ const start = async () => {
       UserResolver,
       CheckoutResolver,
     ],
+   //  validate:true,
     // authChecker est appelée par TypeGraphQL chaque fois qu'une requête est effectuée sur un champ protégé par un décorateur @Authorized.
      authChecker: ({ context }, roles) => {
         if (roles.length > 0 && context.email) {
