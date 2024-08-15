@@ -168,13 +168,13 @@ const RegisterPage = () => {
                         </label>
 
                         <div
-                           onMouseEnter={() => setShowToolTipPassword(true)}
-                           onMouseLeave={() => setShowToolTipPassword(false)}
+                        // onMouseEnter={() => setShowToolTipPassword(true)}
+                        // onMouseLeave={() => setShowToolTipPassword(false)}
                         >
                            <FiInfo className="size-5 text-black ml-1" />
                         </div>
 
-                       {showToolTipPassword && <TooltipPassword />}
+                        {showToolTipPassword && <TooltipPassword />}
                      </div>
                      <div className="relative">
                         <input
@@ -185,7 +185,9 @@ const RegisterPage = () => {
                            })}
                            placeholder="••••••••"
                            className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                        // onChange={(e) => handleInputPasswordChange(e.target.value, watch('confirmPassword'),)}
+                           // onChange={(e) => handleInputPasswordChange(e.target.value, watch('confirmPassword'),)}
+                           onFocus={() => setShowToolTipPassword(true)}
+                           onBlur={()=> setShowToolTipPassword(false)}
                         />
                         <button
                            type="button"
