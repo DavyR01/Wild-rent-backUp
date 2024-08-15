@@ -8,16 +8,17 @@ const TooltipPassword = () => {
             aria-orientation="vertical"
             aria-labelledby="options-menu"
          >
-            <div
-               className="block px-4 py-2 text-sm text-white-700"
-               role="menuitem"
+            <p className="block px-4 py-2 text-sm text-black"
+            ><b>Le mot de passe doit contenir :</b></p>
+            <ul
+               className="block px-4 py-2 text-sm list-disc pl-12 text-red-800"
             >
-               <p>Should contain at least a capital letter</p>
-               <p>Should contain at least a small letter</p>
-               <p>Should contain at least a number</p>
-               <p>Should contain at least a special character</p>
-               <p>And minimum length</p>
-            </div>
+               <li>au moins <b>8 caractères</b></li>
+               <li>au moins <b>une lettre majuscule</b></li>
+               <li>au moins <b>une lettre minuscule</b></li>
+               <li>au moins <b>un chiffre</b> </li>
+               <li>et au moins <b>un caractère spécial</b></li>
+            </ul>
          </div>
       </div>
    )

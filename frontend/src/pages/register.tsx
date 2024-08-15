@@ -100,9 +100,11 @@ const RegisterPage = () => {
       setShowToolTipPassword(!showToolTipPassword)
    }
 
-   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+   const handlePasswordFocus = (e: ChangeEvent<HTMLInputElement>) => {
       if (e.target.value.length > 0) {
          setShowToolTipPassword(false)
+      } else {
+         setShowToolTipPassword(true)
       }
    }
 
@@ -143,7 +145,7 @@ const RegisterPage = () => {
                         {...register("username", {
                            validate: validateUsername,
                         })}
-                        className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                        className={`focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 ${errors.username ? 'border-red-400': ''}`}
                         placeholder="Votre nom d'utilisateur"
                      />
                      {errors.username && <ErrorsValidations message={errors.username.message!} />}
@@ -160,7 +162,7 @@ const RegisterPage = () => {
                         {...register("email", {
                            validate: validateEmail
                         })}
-                        className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                        className={`focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 ${errors.email ? ' border-red-400': ''}`}
                         placeholder="name@domain.com"
                      //  onChange={handleInputMailChange}
                      />
@@ -168,8 +170,8 @@ const RegisterPage = () => {
                   </div>
 
                   {/* Mot de passe  */}
-                  <div>
-                     <div className="flex flex-row relative" tabIndex={0} ref={tooltipRef} onBlur={() => setShowToolTipPassword(false)}>
+                  <div tabIndex={0} ref={tooltipRef} onBlur={() => setShowToolTipPassword(false)}>
+                     <div className="flex flex-row relative" >
                         <label htmlFor="password" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                            Mot de passe
                         </label>
@@ -193,10 +195,11 @@ const RegisterPage = () => {
                               validate: validatePassword
                            })}
                            placeholder="••••••••"
-                           className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                           className={`focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500  ${errors.password || errorSamePassword ? ' border-red-400': ''}`}
                            // onChange={(e) => handleInputPasswordChange(e.target.value, watch('confirmPassword'),)}
-                           onFocus={() => setShowToolTipPassword(true)}
+                           onFocus={(e) => handlePasswordFocus(e)}
                            onBlur={() => setShowToolTipPassword(false)}
+                           // onChange={(e) => handlePasswordFocus(e)}
                            // onChange={(e) => handlePasswordChange(e)}
                         />
                         <button
@@ -223,7 +226,7 @@ const RegisterPage = () => {
                               validate: validateConfirmPassword
                            })}
                            placeholder="••••••••"
-                           className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                           className={`focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 ${errors.confirmPassword || errorSamePassword ? ' border-red-400': ''}`}
                            onChange={(e) => handleInputPasswordChange(watch('password'), e.target.value)}
                         />
                      </div>
