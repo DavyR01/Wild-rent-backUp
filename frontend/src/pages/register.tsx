@@ -24,6 +24,8 @@ const RegisterPage = () => {
    const [showToolTipPassword, setShowToolTipPassword] = useState(false);
    const authInfo = useContext(UserContext);
    const tooltipRef = useRef(null);
+   const [password, setPassword] = useState("");
+
    // const { refetch: checkEmailExists } = useQuery(CHECK_USER_EXISTENCE, {
    //    skip: true, // Skip the initial query
    // });
@@ -191,7 +193,7 @@ const RegisterPage = () => {
                            <FiInfo className="size-5 text-black ml-1" />
                         </div>
 
-                        {showToolTipPassword && <TooltipPassword />}
+                        {showToolTipPassword && <TooltipPassword password={password} />}
                      </div>
                      <div className="relative">
                         <input
@@ -208,6 +210,9 @@ const RegisterPage = () => {
                            // onChange={(e) => handleInputPasswordChange(e.target.value, watch('confirmPassword'),)}
                            onFocus={(e) => handlePasswordFocus(e)}
                            onBlur={() => setShowToolTipPassword(false)}
+                           onChange={(e) => {
+                              setPassword(e.target.value);
+                           }}
                         // onChange={(e) => handlePasswordFocus(e)}
                         // onChange={(e) => handlePasswordChange(e)}
                         />
