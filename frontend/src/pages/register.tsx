@@ -1,5 +1,6 @@
 import { ApolloError, useMutation } from "@apollo/client";
 import ErrorsValidations from "components/ui/ErrorsValidations";
+import TooltipPassword from "components/ui/TooltipPassword";
 import { UserContext } from "contexts/UserContext";
 import { CREATE_USER } from "lib/graphql/mutations";
 import Image from "next/image";
@@ -7,9 +8,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { FiInfo } from "react-icons/fi";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { inputRegisterUser } from "types/inputRegisterUser";
 import { validateConfirmPassword, validateEmail, validatePassword, validateUsername } from "validators/authUser.validator-front";
+
 // import { validateExistingUser } from "../../../backend/src/validators/authUser.validator-backk";
 
 const RegisterPage = () => {
@@ -18,6 +21,7 @@ const RegisterPage = () => {
    const [errorMessage, setErrorMessage] = useState("");
    const [errorSamePassword, setErrorSamePassword] = useState("");
    const [formSubmitted, setFormSubmitted] = useState(false);
+   const [showToolTipPassword, setShowToolTipPassword] = useState(false);
    const authInfo = useContext(UserContext);
    // const { refetch: checkEmailExists } = useQuery(CHECK_USER_EXISTENCE, {
    //    skip: true, // Skip the initial query
@@ -71,7 +75,7 @@ const RegisterPage = () => {
          router.push("/login");
       } catch (err: any) {
          // if (err instanceof ApolloError) {
-            // throw err
+         // throw err
          // }
          const apolloError = err as ApolloError;
          // setErrorMessage(apolloError.message ?? "Une erreur s'est produite lors de la création de l'utilisateur");
@@ -158,9 +162,20 @@ const RegisterPage = () => {
 
                   {/* Mot de passe  */}
                   <div>
-                     <label htmlFor="password" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                        Mot de passe
-                     </label>
+                     <div className=" flex flex-row relative">
+                        <label htmlFor="password" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
+                           Mot de passe
+                        </label>
+
+                        <div
+                           onMouseEnter={() => setShowToolTipPassword(true)}
+                           onMouseLeave={() => setShowToolTipPassword(false)}
+                        >
+                           <FiInfo className="size-5 text-black ml-1" />
+                        </div>
+
+                       {showToolTipPassword && <TooltipPassword />}
+                     </div>
                      <div className="relative">
                         <input
                            id="password"
