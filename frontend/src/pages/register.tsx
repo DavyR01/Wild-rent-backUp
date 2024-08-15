@@ -132,7 +132,7 @@ const RegisterPage = () => {
 
 
                <form
-                  className="space-y-4 md:space-y-6"
+                  className="space-y-3 md:space-y-3"
                   onSubmit={handleSubmit(onSubmit)}
                >
                   {/* Nom dutilisateur */}

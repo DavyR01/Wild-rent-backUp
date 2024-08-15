@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { HiEye, HiEyeOff } from "react-icons/hi";
-import { IoIosWarning } from "react-icons/io";
 import "react-toastify/dist/ReactToastify.css";
 import { inputLoginUser } from "types/inputLoginUser";
 
@@ -147,17 +146,7 @@ const LoginPage = () => {
                         />
 
                         {/* Gestion des erreurs e-mails */}
-                        {errors.email && (
-                           <div
-                              className="relative mt-2 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
-                              role="alert"
-                           >
-                              <strong className="font-bold">Erreur: </strong>
-                              <span className="block sm:inline">
-                                 {errors.email.message}
-                              </span>
-                           </div>
-                        )}
+                        {errors.email && <ErrorsValidations message={errors.email.message} />}
                      </div>
 
                      {/* Mot de passe */}
@@ -230,17 +219,7 @@ const LoginPage = () => {
                   </form>
 
                   {/* Gestion des erreurs globales */}
-                  {errorMessage && (
-                     <div
-                        className="relative mt-2 flex rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
-                        role="alert"
-                     >
-                        <IoIosWarning className="mr-2 text-xl" />
-                        <span className="block sm:inline">{errorMessage}</span>
-                     </div>
-                  )}
-
-
+                  {errorMessage && <ErrorsValidations message={errorMessage} />}
                </div>
             </div>
          </div>
