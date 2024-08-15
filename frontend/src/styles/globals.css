@@ -8,9 +8,9 @@
 /* :root {} */
 
 * {
-  box-sizing: border-box;
+  /* box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  padding: 0; */
 }
 
 a {
@@ -119,4 +119,5 @@ input {
   border: 1px solid rgb(195, 195, 195);
   border-radius: 10px;
   padding: 5px;
+  outline: none;
 }

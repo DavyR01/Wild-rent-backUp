@@ -14,7 +14,7 @@ export function validateEmail(email: string): void {
 // }
 
 export function validateExistingUser(existingUser: User | null): void {
-   if (existingUser) throw new ApolloError("Apollo Error : Ce mail existe déjà, veuillez choisir un autre mail.");
+   if (existingUser) throw new ApolloError("Ce mail existe déjà, veuillez choisir un autre mail.");
 }
 
 export function validatePassword(password: string): void {
