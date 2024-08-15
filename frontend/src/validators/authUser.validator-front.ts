@@ -37,7 +37,7 @@ export const validatePassword = (password: string): string | undefined => {
    }
 
    if (!regex.test(password)) {
-      return "Erreur validation : Le mot de passe doit contenir au moins 8 caractères, au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.";
+      return "Le mot de passe doit contenir au moins 8 caractères, au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.";
    }
 }
 

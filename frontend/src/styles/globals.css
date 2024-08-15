@@ -119,4 +119,5 @@ input {
   border: 1px solid rgb(195, 195, 195);
   border-radius: 10px;
   padding: 5px;
+  outline: none;
 }
