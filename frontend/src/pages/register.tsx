@@ -24,7 +24,7 @@ const RegisterPage = () => {
    const [showToolTipPassword, setShowToolTipPassword] = useState(false);
    const authInfo = useContext(UserContext);
    const tooltipRef = useRef(null);
-   const [password, setPassword] = useState("");
+   // const [password, setPassword] = useState("");
 
    // const { refetch: checkEmailExists } = useQuery(CHECK_USER_EXISTENCE, {
    //    skip: true, // Skip the initial query
@@ -103,11 +103,11 @@ const RegisterPage = () => {
    }
 
    const handlePasswordFocus = (e: ChangeEvent<HTMLInputElement>) => {
-      if (e.target.value.length > 0) {
-         setShowToolTipPassword(false)
-      } else {
-         setShowToolTipPassword(true)
-      }
+      // if (e.target.value.length > 0) {
+      // setShowToolTipPassword(false)
+      // } else {
+      setShowToolTipPassword(true)
+      // }
    }
 
    return (
@@ -193,7 +193,7 @@ const RegisterPage = () => {
                            <FiInfo className="size-5 text-black ml-1" />
                         </div>
 
-                        {showToolTipPassword && <TooltipPassword password={password} />}
+                        {showToolTipPassword && <TooltipPassword password={watch('password')} />}
                      </div>
                      <div className="relative">
                         <input
@@ -210,9 +210,14 @@ const RegisterPage = () => {
                            // onChange={(e) => handleInputPasswordChange(e.target.value, watch('confirmPassword'),)}
                            onFocus={(e) => handlePasswordFocus(e)}
                            onBlur={() => setShowToolTipPassword(false)}
-                           onChange={(e) => {
-                              setPassword(e.target.value);
-                           }}
+
+
+                        // TODO: A VOIR pourquoi le cadre reouge ne disparait pas lorsque le mot de passe est bon. Fonctionne lorsque l'on enlève le onChange.
+                        // onChange={(e) => {
+                        //    setPassword(e.target.value);
+                        // }}
+
+
                         // onChange={(e) => handlePasswordFocus(e)}
                         // onChange={(e) => handlePasswordChange(e)}
                         />
