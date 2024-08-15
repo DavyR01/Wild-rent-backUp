@@ -6,7 +6,7 @@ import { CREATE_USER } from "lib/graphql/mutations";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ChangeEvent, useContext, useRef, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FiInfo } from "react-icons/fi";
 import { HiEye, HiEyeOff } from "react-icons/hi";
@@ -23,7 +23,6 @@ const RegisterPage = () => {
    const [formSubmitted, setFormSubmitted] = useState(false);
    const [showToolTipPassword, setShowToolTipPassword] = useState(false);
    const authInfo = useContext(UserContext);
-   const tooltipRef = useRef(null);
    // const [password, setPassword] = useState("");
 
    // const { refetch: checkEmailExists } = useQuery(CHECK_USER_EXISTENCE, {
@@ -178,7 +177,7 @@ const RegisterPage = () => {
                   </div>
 
                   {/* Mot de passe  */}
-                  <div tabIndex={0} ref={tooltipRef} onBlur={() => setShowToolTipPassword(false)}>
+                  <div tabIndex={0} onBlur={() => setShowToolTipPassword(false)}>
                      <div className="flex flex-row relative" >
                         <label htmlFor="password" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                            Mot de passe
