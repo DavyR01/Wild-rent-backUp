@@ -6,7 +6,7 @@ import { CREATE_USER } from "lib/graphql/mutations";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import { ChangeEvent, useContext, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FiInfo } from "react-icons/fi";
 import { HiEye, HiEyeOff } from "react-icons/hi";
@@ -23,6 +23,7 @@ const RegisterPage = () => {
    const [formSubmitted, setFormSubmitted] = useState(false);
    const [showToolTipPassword, setShowToolTipPassword] = useState(false);
    const authInfo = useContext(UserContext);
+   const tooltipRef = useRef(null);
    // const { refetch: checkEmailExists } = useQuery(CHECK_USER_EXISTENCE, {
    //    skip: true, // Skip the initial query
    // });
@@ -95,9 +96,15 @@ const RegisterPage = () => {
       }
    }
 
-   // const handleInputMailChange = () => {
+   const handleShowToolTipPassword = () => {
+      setShowToolTipPassword(!showToolTipPassword)
+   }
 
-   // }
+   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+      if (e.target.value.length > 0) {
+         setShowToolTipPassword(false)
+      }
+   }
 
    return (
       <div className="flex justify-center">
@@ -162,14 +169,16 @@ const RegisterPage = () => {
 
                   {/* Mot de passe  */}
                   <div>
-                     <div className=" flex flex-row relative">
+                     <div className="flex flex-row relative" tabIndex={0} ref={tooltipRef} onBlur={() => setShowToolTipPassword(false)}>
                         <label htmlFor="password" className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                            Mot de passe
                         </label>
 
                         <div
-                        // onMouseEnter={() => setShowToolTipPassword(true)}
-                        // onMouseLeave={() => setShowToolTipPassword(false)}
+                           // onMouseEnter={() => setShowToolTipPassword(true)}
+                           // onMouseLeave={() => setShowToolTipPassword(false)}
+                           onClick={handleShowToolTipPassword}
+                        // onBlur={()=>setShowToolTipPassword(false)}
                         >
                            <FiInfo className="size-5 text-black ml-1" />
                         </div>
@@ -187,7 +196,8 @@ const RegisterPage = () => {
                            className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                            // onChange={(e) => handleInputPasswordChange(e.target.value, watch('confirmPassword'),)}
                            onFocus={() => setShowToolTipPassword(true)}
-                           onBlur={()=> setShowToolTipPassword(false)}
+                           onBlur={() => setShowToolTipPassword(false)}
+                           // onChange={(e) => handlePasswordChange(e)}
                         />
                         <button
                            type="button"
