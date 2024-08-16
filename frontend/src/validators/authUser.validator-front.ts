@@ -16,7 +16,7 @@ export const validateUsername = (username: string): string | undefined => {
 }
 
 
-export const validateEmail = (email: string): string | undefined => {
+export const validateEmail = (email: string, setEmailError: any): string | undefined => {
    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
 
    if (!email) {
@@ -26,6 +26,10 @@ export const validateEmail = (email: string): string | undefined => {
    if (!regex.test(email)) {
       return "Veuillez saisir une adresse e-mail valide";
    }
+
+   console.log("set EMAIL error");
+   
+   setEmailError("")
 }
 
 
@@ -42,11 +46,15 @@ export const validatePassword = (password: string): string | undefined => {
 }
 
 
-export const validateConfirmPassword = (confirmPassword: string): string | undefined => {
-   const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/
+export const validateConfirmPassword = (confirmPassword: string, getValues: any): string | undefined => {
+   // const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/
+   const password = getValues('password')
 
    if (!confirmPassword) {
       return "La confirmation de mot de passe est requise";
+   }
+   if (confirmPassword !== password) {
+      return "Les mots de passe ne correspondent pas !";
    }
 }
 

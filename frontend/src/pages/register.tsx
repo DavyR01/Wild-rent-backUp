@@ -34,7 +34,7 @@ const RegisterPage = () => {
       router.push("/");
    }
 
-   const { register, handleSubmit, formState: { errors }, watch } = useForm<inputRegisterUser>(
+   const { register, handleSubmit, formState: { errors }, watch, trigger, getValues } = useForm<inputRegisterUser>(
       { mode: "onChange" }
    );
    const [createUser, { loading, error: mutationError }] = useMutation(CREATE_USER);
@@ -47,12 +47,11 @@ const RegisterPage = () => {
       setFormSubmitted(true)
       setglobalError("")
       setEmailError("")
+      setErrorSamePassword("")
 
       if (data.password !== data.confirmPassword) {
          setErrorSamePassword("Les mots de passe ne correspondent pas");
          return
-      } else {
-         setErrorSamePassword("")
       }
 
       try {
@@ -95,13 +94,15 @@ const RegisterPage = () => {
 
    const eyeIcon = showPassword ? <HiEyeOff /> : <HiEye />;
 
-   const handleInputPasswordChange = (password: string, confirmPassword: string) => {
-      if (password !== confirmPassword) {
-         setErrorSamePassword("Les mots de passe ne correspondent pas");
-      } else {
-         setErrorSamePassword("")
-      }
-   }
+   // const handleInputPasswordChange = async (password: string, confirmPassword: string) => {
+   //    if (password !== confirmPassword) {
+   //       setErrorSamePassword("Les mots de passe ne correspondent pas");
+   //    } else {
+   //       setErrorSamePassword("")
+   //    }
+
+   //    await trigger('confirmPassword')
+   // }
 
    const handleShowToolTipPassword = () => {
       setShowToolTipPassword(!showToolTipPassword)
@@ -172,16 +173,20 @@ const RegisterPage = () => {
                         id="email"
                         type="email"
                         {...register("email", {
-                           validate: validateEmail
+                           // validate: validateEmail
+                           validate: (value) => validateEmail(value, setEmailError)
+
+                           // validate: (value) => validateEmail(value, getValues)
+
                         })}
                         className={`
                            ${emailInputClass}
                            ${errors.email ? 'border-red-400 focus:ring-red-500 focus:border-red-500'
                               : 'border-gray-300 focus:ring-primary-600 focus:border-black dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500'}`}
                         placeholder="name@domain.com"
-                     // onChange={(e) => {
-                     //    setEmailError("");
-                     // }}
+                        // onChange={(e) => {
+                        //    setEmailError("");
+                        // }}
                      //  onChange={handleInputMailChange}
                      />
                      {errors.email && <ErrorsValidations message={errors.email.message} />}
@@ -253,7 +258,7 @@ const RegisterPage = () => {
                            id="confirmPassword"
                            type={showPassword ? "text" : "password"}
                            {...register("confirmPassword", {
-                              validate: validateConfirmPassword
+                              validate: (value) => validateConfirmPassword(value, getValues)
                            })}
                            placeholder="••••••••"
                            className={`focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 
@@ -261,8 +266,8 @@ const RegisterPage = () => {
                               ${errors.confirmPassword || errorSamePassword ? 'border-red-400 focus:ring-red-500 focus:border-red-500'
                                  : 'border-gray-300 focus:ring-primary-600 focus:border-black dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500'}`}
 
-                           // TODO: a revoir
-                           onChange={(e) => handleInputPasswordChange(watch('password'), e.target.value)}
+                        // TODO: a revoir
+                        // onChange={(e) => handleInputPasswordChange(watch('password'), e.target.value)}
                         />
                      </div>
 
