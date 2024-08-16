@@ -42,11 +42,15 @@ export const validatePassword = (password: string): string | undefined => {
 }
 
 
-export const validateConfirmPassword = (confirmPassword: string): string | undefined => {
-   const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/
+export const validateConfirmPassword = (confirmPassword: string, getValues: any): string | undefined => {
+   // const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/
+   const password = getValues('password')
 
    if (!confirmPassword) {
       return "La confirmation de mot de passe est requise";
+   }
+   if (confirmPassword !== password) {
+      return "Les mots de passe ne correspondent pas !";
    }
 }
 
