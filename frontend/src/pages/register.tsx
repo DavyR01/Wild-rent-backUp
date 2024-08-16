@@ -34,8 +34,8 @@ const RegisterPage = () => {
       router.push("/");
    }
 
-   const { register, handleSubmit, formState: { errors }, watch, trigger, getValues } = useForm<inputRegisterUser>(
-      { mode: "onChange" }
+   const { register, handleSubmit, formState: { errors }, watch, getValues } = useForm<inputRegisterUser>(
+      // { mode: "onChange" }
    );
    const [createUser, { loading, error: mutationError }] = useMutation(CREATE_USER);
 
