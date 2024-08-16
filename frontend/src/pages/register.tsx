@@ -21,6 +21,13 @@ const RegisterPage = () => {
    const [formSubmitted, setFormSubmitted] = useState(false);
    const [showToolTipPassword, setShowToolTipPassword] = useState(false);
    const authInfo = useContext(UserContext);
+   const errorHandlers: { [key: string]: () => void } = {
+      "Apollo Error : Existing user": () => setEmailError("Ce mail existe déjà, veuillez choisir un autre mail."),
+      "Apollo Error : invalid mail": () => setglobalError("Veuillez saisir une adresse mail valide."),
+      "Apollo Error : password rules": () => setglobalError("Le mot de passe est trop faible, veuillez choisir un mot de passe plus long et complexe."),
+      "Apollo Error : username length": () => setglobalError("Le nom d'utilisateur doit contenir au moins 5 caractères")
+   };
+
 
    if (authInfo.isLoggedIn) {
       router.push("/");
@@ -55,8 +62,13 @@ const RegisterPage = () => {
          router.push("/login");
       } catch (err: any) {
          const apolloError = err as ApolloError;
-         if (apolloError.message.includes("Ce mail existe déjà, veuillez choisir un autre mail.")) {
-            setEmailError(apolloError.message);
+         const errorMessage = apolloError.message;
+         const handler = Object.keys(errorHandlers).find((key) =>
+            errorMessage.includes(key)
+         );
+
+         if (handler) {
+            errorHandlers[handler]();
          } else {
             setglobalError("Une erreur s'est produite lors de la création de l'utilisateur");
          }
