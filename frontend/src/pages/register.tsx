@@ -117,6 +117,10 @@ const RegisterPage = () => {
       // }
    }
 
+   const handleClickRegsiter = () => {
+      setFormSubmitted(true)
+   }
+
    const emailInputClass = `focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border ${emailError ? 'border-red-400 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'
       } bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500`;
 
@@ -158,11 +162,11 @@ const RegisterPage = () => {
                            validate: validateUsername,
                         })}
                         className={`focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 
-                           ${errors.username ? 'border-red-400 focus:ring-red-500 focus:border-red-500'
+                           ${errors.username && formSubmitted ? 'border-red-400 focus:ring-red-500 focus:border-red-500'
                               : 'border-gray-300 focus:ring-primary-600 focus:border-black dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500'}`}
                         placeholder="Votre nom d'utilisateur"
                      />
-                     {errors.username && <ErrorsValidations message={errors.username.message!} />}
+                     {errors.username && formSubmitted && <ErrorsValidations message={errors.username.message!} />}
                   </div>
 
                   {/* E-mail */}
@@ -178,7 +182,7 @@ const RegisterPage = () => {
                         })}
                         className={`
                            ${emailInputClass}
-                           ${errors.email ? 'border-red-400 focus:ring-red-500 focus:border-red-500'
+                           ${errors.email && formSubmitted ? 'border-red-400 focus:ring-red-500 focus:border-red-500'
                               : 'border-gray-300 focus:ring-primary-600 focus:border-black dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500'}`}
                         placeholder="name@domain.com"
                         // onChange={(e) => {
@@ -186,8 +190,8 @@ const RegisterPage = () => {
                         // }}
                      //  onChange={handleInputMailChange}
                      />
-                     {errors.email && <ErrorsValidations message={errors.email.message} />}
-                     {emailError && <ErrorsValidations message={emailError} />}
+                     {errors.email && formSubmitted && <ErrorsValidations message={errors.email.message} />}
+                     {emailError &&<ErrorsValidations message={emailError} />}
                   </div>
 
                   {/* Mot de passe  */}
@@ -218,7 +222,7 @@ const RegisterPage = () => {
                            placeholder="••••••••"
                            className={`focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500  
                               
-                              ${errors.password || errorSamePassword ? 'border-red-400 focus:ring-red-500 focus:border-red-500'
+                              ${(errors.password || errorSamePassword) && formSubmitted ? 'border-red-400 focus:ring-red-500 focus:border-red-500'
                                  : 'border-gray-300 focus:ring-primary-600 focus:border-black dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500'}`}
                            // onChange={(e) => handleInputPasswordChange(e.target.value, watch('confirmPassword'),)}
                            onFocus={(e) => handlePasswordFocus(e)}
@@ -242,7 +246,7 @@ const RegisterPage = () => {
                            {eyeIcon}
                         </button>
                      </div>
-                     {errors.password && <ErrorsValidations message={errors.password.message} />}
+                     {errors.password && formSubmitted &&<ErrorsValidations message={errors.password.message} />}
                   </div>
 
                   {/* Confirmer le mot de passe */}
@@ -260,7 +264,7 @@ const RegisterPage = () => {
                            placeholder="••••••••"
                            className={`focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 
                               
-                              ${errors.confirmPassword || errorSamePassword ? 'border-red-400 focus:ring-red-500 focus:border-red-500'
+                              ${(errors.confirmPassword || errorSamePassword) && formSubmitted ? 'border-red-400 focus:ring-red-500 focus:border-red-500'
                                  : 'border-gray-300 focus:ring-primary-600 focus:border-black dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500'}`}
 
                         // TODO: a revoir
@@ -270,7 +274,7 @@ const RegisterPage = () => {
 
                      {/* Gestion erreurs Mot de passe */
                      /* Non confirmé */}
-                     {errors.confirmPassword && <ErrorsValidations message={errors.confirmPassword.message!} />}
+                     {errors.confirmPassword && formSubmitted && <ErrorsValidations message={errors.confirmPassword.message!} />}
 
                      {/* Non identique */}
                      {errorSamePassword && formSubmitted && <ErrorsValidations message={errorSamePassword} />}
@@ -286,6 +290,7 @@ const RegisterPage = () => {
                      type="submit"
                      className="w-full rounded-lg bg-indigo-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
                      disabled={loading}
+                     onClick={handleClickRegsiter}
                   >
                      S&apos;enregistrer
                   </button>
