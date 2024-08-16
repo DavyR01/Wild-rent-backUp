@@ -11,6 +11,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import "react-toastify/dist/ReactToastify.css";
 import { inputLoginUser } from "types/inputLoginUser";
+import { validateEmail } from "validators/authUser.validator-front";
 
 const LoginPage = () => {
    const authInfo = useContext(UserContext);
@@ -132,17 +133,13 @@ const LoginPage = () => {
                         <input
                            type="email"
                            {...register("email", {
-                              required: "Le mail est requis",
-                              pattern: {
-                                 value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                                 message: "Veuillez saisir une adresse e-mail valide",
-                              },
+                              validate: validateEmail
                            })}
                            className={`
                               ${emailInputClass}                              
                               ${errors.email ? 'border-red-400 focus:ring-red-500 focus:border-red-500'
                                  : 'border-gray-300 focus:ring-primary-600 focus:border-black dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500'}`}
-                                 placeholder="name@domain.com"
+                           placeholder="name@domain.com"
                         />
 
                         {/* Gestion des erreurs e-mails */}
