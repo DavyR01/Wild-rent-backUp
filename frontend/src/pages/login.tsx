@@ -50,12 +50,8 @@ const LoginPage = () => {
    const [handleLogin] = useLazyQuery(LOGIN, {
       async onCompleted(data) {
          localStorage.setItem("jwt", data.loginUser);
-         //   toastSuccessLogin()
-         //   localStorage.setItem("LoginSuccess", "true");
          authInfo.refetchLogin();
-         //   router.reload();
-         // router.push("/");
-         //  router.back()
+
       },
       onError(err) {
          if (err.message.includes("User not found")) {

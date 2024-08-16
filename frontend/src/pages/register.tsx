@@ -13,22 +13,14 @@ import { HiEye, HiEyeOff } from "react-icons/hi";
 import { inputRegisterUser } from "types/inputRegisterUser";
 import { validateConfirmPassword, validateEmail, validatePassword, validateUsername } from "validators/authUser.validator-front";
 
-// import { validateExistingUser } from "../../../backend/src/validators/authUser.validator-backk";
-
 const RegisterPage = () => {
    const router = useRouter();
    const [showPassword, setShowPassword] = useState(false);
    const [globalError, setglobalError] = useState("");
-   const [errorSamePassword, setErrorSamePassword] = useState("");
    const [emailError, setEmailError] = useState("");
    const [formSubmitted, setFormSubmitted] = useState(false);
    const [showToolTipPassword, setShowToolTipPassword] = useState(false);
    const authInfo = useContext(UserContext);
-   // const [password, setPassword] = useState("");
-
-   // const { refetch: checkEmailExists } = useQuery(CHECK_USER_EXISTENCE, {
-   //    skip: true, // Skip the initial query
-   // });
 
    if (authInfo.isLoggedIn) {
       router.push("/");
@@ -48,24 +40,7 @@ const RegisterPage = () => {
       setglobalError("")
       setEmailError("")
 
-      // if (data.password !== data.confirmPassword) {
-      //    setErrorSamePassword("Les mots de passe ne correspondent pas");
-      //    return
-      // } else {
-      //    setErrorSamePassword("")
-      // }
-
       try {
-         // const { data: existingUserData } = await checkEmailExists({
-         //    variables: { email: data.email }
-         // });
-
-         // const existingUser = existingUserData?.user;
-         // const validationError = validateExistingUser(existingUser);
-         // if (validationError) {
-         //    setglobalError(validationError);
-         //    return;
-         // }
          await createUser({
             variables: {
                newUserData: {
@@ -79,11 +54,7 @@ const RegisterPage = () => {
          localStorage.setItem("registrationSuccess", "true");
          router.push("/login");
       } catch (err: any) {
-         // if (err instanceof ApolloError) {
-         // throw err
-         // }
          const apolloError = err as ApolloError;
-         // setglobalError(apolloError.message ?? "Une erreur s'est produite lors de la création de l'utilisateur");
          if (apolloError.message.includes("Ce mail existe déjà, veuillez choisir un autre mail.")) {
             setEmailError(apolloError.message);
          } else {
@@ -92,29 +63,14 @@ const RegisterPage = () => {
          console.error("Catch Error : " + err);
       }
    };
-
    const eyeIcon = showPassword ? <HiEyeOff /> : <HiEye />;
-
-   // const handleInputPasswordChange = async (password: string, confirmPassword: string) => {
-   //    if (password !== confirmPassword) {
-   //       setErrorSamePassword("Les mots de passe ne correspondent pas");
-   //    } else {
-   //       setErrorSamePassword("")
-   //    }
-
-   //    await trigger('confirmPassword')
-   // }
 
    const handleShowToolTipPassword = () => {
       setShowToolTipPassword(!showToolTipPassword)
    }
 
    const handlePasswordFocus = (e: ChangeEvent<HTMLInputElement>) => {
-      // if (e.target.value.length > 0) {
-      // setShowToolTipPassword(false)
-      // } else {
       setShowToolTipPassword(true)
-      // }
    }
 
    const emailInputClass = `focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border ${emailError ? 'border-red-400 focus:ring-red-500 focus:border-red-500' : 'border-gray-300'
@@ -181,10 +137,6 @@ const RegisterPage = () => {
                            ${errors.email ? 'border-red-400 focus:ring-red-500 focus:border-red-500'
                               : 'border-gray-300 focus:ring-primary-600 focus:border-black dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500'}`}
                         placeholder="name@domain.com"
-                        // onChange={(e) => {
-                        //    setEmailError("");
-                        // }}
-                     //  onChange={handleInputMailChange}
                      />
                      {errors.email && <ErrorsValidations message={errors.email.message} />}
                      {emailError && <ErrorsValidations message={emailError} />}
@@ -198,10 +150,7 @@ const RegisterPage = () => {
                         </label>
 
                         <div
-                           // onMouseEnter={() => setShowToolTipPassword(true)}
-                           // onMouseLeave={() => setShowToolTipPassword(false)}
                            onClick={handleShowToolTipPassword}
-                        // onBlur={()=>setShowToolTipPassword(false)}
                         >
                            <FiInfo className="size-5 text-black ml-1" />
                         </div>
@@ -220,19 +169,8 @@ const RegisterPage = () => {
                               
                               ${errors.password || errors.confirmPassword ? 'border-red-400 focus:ring-red-500 focus:border-red-500'
                                  : 'border-gray-300 focus:ring-primary-600 focus:border-black dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500'}`}
-                           // onChange={(e) => handleInputPasswordChange(e.target.value, watch('confirmPassword'),)}
                            onFocus={(e) => handlePasswordFocus(e)}
                            onBlur={() => setShowToolTipPassword(false)}
-
-
-                        // TODO: A VOIR pourquoi le cadre rouge ne disparait pas lorsque le mot de passe est bon. Fonctionne lorsque l'on enlève le onChange. Résolu avec watch('password' ligne 207)
-                        // onChange={(e) => {
-                        //    setPassword(e.target.value);
-                        // }}
-
-
-                        // onChange={(e) => handlePasswordFocus(e)}
-                        // onChange={(e) => handlePasswordChange(e)}
                         />
                         <button
                            type="button"
@@ -263,8 +201,6 @@ const RegisterPage = () => {
                               ${errors.confirmPassword ? 'border-red-400 focus:ring-red-500 focus:border-red-500'
                                  : 'border-gray-300 focus:ring-primary-600 focus:border-black dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500'}`}
 
-                        // TODO: a revoir
-                        // onChange={(e) => handleInputPasswordChange(watch('password'), e.target.value)}
                         />
                      </div>
 
