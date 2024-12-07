@@ -3,7 +3,6 @@
 # dependencies
 /.pnp
 .pnp.js
-pnpm-lock.yaml
 # /node_modules is already ignored by .gitignore in the root of your repository
 
 # testing

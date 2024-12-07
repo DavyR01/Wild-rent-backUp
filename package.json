@@ -5,6 +5,7 @@
    "main": "index.js",
    "scripts": {
       "ok": "docker compose -f docker-compose.yml up",
+      "setup": "pnpm i && pnpm i --prefix ./frontend && pnpm i --prefix ./backend && pnpm i --prefix ./e2e",
       "start": "docker compose -f docker-compose.yml up --build",
       "start-d": "docker compose -f docker-compose.yml up --build -d",
       "startprod": "docker compose -f docker-compose.prod.yml up --build",
@@ -15,7 +16,8 @@
       "docker:drop": "docker compose exec backend pnpm run typeorm schema:drop",
       "docker:generate": "docker compose exec backend pnpm run migration:generate",
       "docker:cp": "docker compose cp backend:/app/src/database/migrations/ backend/src/database",
-      "install": "cd backend & pnpm i && cd ../frontend && pnpm i"
+      "delete": "rm -rf node_modules pnpm-lock.yaml && cd frontend && rm -rf node_modules pnpm-lock.yaml && cd ../backend && rm -rf node_modules pnpm-lock.yaml && cd ../e2e && rm -rf node_modules pnpm-lock.yaml"
+
    },
    "keywords": [],
    "author": "",
