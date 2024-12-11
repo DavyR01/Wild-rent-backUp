@@ -13,6 +13,7 @@ node_modules
 .env.apikey
 .env.dev
 .env.prod
+.env.test
 
 logs
 # Fait référence aux logs générés par le service ou container gateway (nginx)

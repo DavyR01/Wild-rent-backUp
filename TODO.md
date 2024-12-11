@@ -31,3 +31,7 @@ db:
 3. Mettre à jour toutes les versions de dépendances des packages.json
 
 4. Remplacer les variables dynamiques et les intégrer dans des fichiers d'environnements pour plus de flexibilité pour le passage d'un mode à un autre.
+
+5) Réintégrer l'exposition des ports des services directement à partir du fichier docker-compose.prod ?? Ou laisser gérer le reverse proxy nginx ?? S'interroger pour db car actuellement dans la configuration, la base de données db n'est pas exposé au port 5432.
+
+6) Lors de la déconnexion de l'utilisateur, le rediriger vers la route /login.

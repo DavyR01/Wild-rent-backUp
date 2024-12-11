@@ -89,4 +89,4 @@ services:
     #   - "8081:8081"
 
 volumes:
-  pgdata_new1:
+  pgdata_wildrent_production:
