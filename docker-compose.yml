@@ -42,13 +42,15 @@ services:
       - "5434:5432"
     environment:
       POSTGRES_PASSWORD: wildrent
+    env_file: .env.dev
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -d postgres -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 20
     volumes:
-      - pgdata_new1:/var/lib/postgresql/data
+      # - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - pgdata_wildrent:/var/lib/postgresql/data
 
   imagesupload:
     build: ./imagesupload
@@ -76,4 +78,4 @@ services:
       - "8081:8081"
 
 volumes:
-  pgdata_new1:
+  pgdata_wildrent:
