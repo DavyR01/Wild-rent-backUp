@@ -1,17 +1,25 @@
+// import dotenv from "dotenv";
+// import path from "node:path";
 import { DataSource } from "typeorm";
 // import { Migration1721926264177 } from "../database/migrations/1721926264177-migration";
-// import path from 'path';
+
+// const envFile =
+//   process.env.NODE_ENV === "production" ? ".env.prod" : ".env.dev";
+
+// dotenv.config({ path: path.join(__dirname, "../../..") });
+
+const {DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME} = process.env
 
 const dataSource = new DataSource({
   type: "postgres",
   //   url: "postgres://postgres:wildrent@db:5432/postgres",
-  host: "db",
+  host: DB_HOST,
   //   host: "localhost",
-  port: 5432,
+  port: DB_PORT ? parseInt(DB_PORT, 10) : undefined,
   //   port: 5434,
-  username: "postgres",
-  password: "wildrent",
-  database: "postgres",
+  username: DB_USERNAME,
+  password: DB_PASSWORD,
+  database: DB_NAME,
   entities: ["src/entities/*.ts"],
   synchronize: false,
   logging: ["error", "query"],

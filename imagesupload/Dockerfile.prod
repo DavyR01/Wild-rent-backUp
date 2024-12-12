@@ -12,4 +12,4 @@ RUN pnpm i
 RUN pnpm i -D @types/express
 
 COPY src src
-CMD pnpm start
+CMD pnpm run dev
