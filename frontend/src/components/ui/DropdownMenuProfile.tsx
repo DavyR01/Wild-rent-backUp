@@ -33,7 +33,7 @@ const DropdownMenuProfile = ({
           className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
           role="menuitem"
         >
-          Accéder à son profil
+          Accéder à mon profil
         </Link>
         <div
           className="block px-4 cursor-pointer py-2 text-sm text-gray-700 hover:bg-gray-100"

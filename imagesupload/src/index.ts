@@ -10,7 +10,7 @@ const port = 8000;
 app.use(cors());
 
 app.get("/", (_, res: Response) => {
-  res.send("Hello World!");
+  res.send("Welcome to the imagesupload server !!");
 });
 
 const storage = multer.diskStorage({
@@ -27,7 +27,8 @@ const upload = multer({ storage: storage });
 app.post("/upload", upload.single("file"), (req: Request, res: Response) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ error: "No file uploaded" });
+      res.status(400).json({ error: "No file uploaded" });
+      return
     }
     res
       .status(201)

@@ -12,4 +12,4 @@ COPY package.json package.json
 RUN pnpm i
 
 COPY . .
-CMD pnpm start
+CMD pnpm run dev

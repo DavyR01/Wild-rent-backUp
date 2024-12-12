@@ -1,3 +1,5 @@
+version: "1.2"
+
 services:
   backend:
     image: wildrent9/wildrent-back
