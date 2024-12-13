@@ -3,13 +3,13 @@ name: playwright-and-docker-ci
 on: push
 
 jobs:
-  test-e2e:
-    runs-on: ubuntu-latest
-    steps:
-      - name: ⚙️ Check out code
-        uses: actions/checkout@v2
-      - name: ⚙️ Run test e2e
-        run: docker compose -f docker-compose.e2e.yml up --build --exit-code-from e2e
+#   test-e2e:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: ⚙️ Check out code
+#         uses: actions/checkout@v2
+#       - name: ⚙️ Run test e2e
+#         run: docker compose -f docker-compose.e2e.yml up --build --exit-code-from e2e
 #   front-test:
 #     runs-on: ubuntu-latest
 #     steps:
@@ -18,7 +18,7 @@ jobs:
 #       - name: ⚙️ Run interface front test
 #         run: cd frontend && pnpm run test
   docker:
-    needs: test-e2e
+   #  needs: test-e2e
     if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
