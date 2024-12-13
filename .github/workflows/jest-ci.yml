@@ -30,18 +30,26 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
       - name: 🖥 Build and push frontend
         uses: docker/build-push-action@v4
         with:
           push: true
           context: "{{defaultContext}}:frontend"
           file: "Dockerfile.prod"
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/wildrent-front:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_CLIENT_FRONTEND }}:latest
       - name: 🗂 Build and push backend
         uses: docker/build-push-action@v4
         with:
           push: true
           context: "{{defaultContext}}:backend"
           file: "Dockerfile.prod"
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/wildrent-back:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_SERVER_BACKEND }}:latest
+      - name: 📤 Build and push imagesupload
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          context: "{{defaultContext}}:imagesupload"
+          file: "Dockerfile.prod"
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_SERVER_IMAGES }}:latest
+
