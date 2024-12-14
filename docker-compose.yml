@@ -41,8 +41,8 @@ services:
     image: postgres
     env_file: .env.dev
     restart: always
-    ports:
-      - "5434:5432"
+    # ports:
+    #   - "5434:5432"
     environment:
       POSTGRES_PASSWORD: wildrent
     healthcheck:
