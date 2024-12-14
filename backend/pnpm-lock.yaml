@@ -182,12 +182,12 @@ packages:
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
 
-  '@graphql-yoga/subscription@5.0.1':
-    resolution: {integrity: sha512-1wCB1DfAnaLzS+IdoOzELGGnx1ODEg9nzQXFh4u2j02vAnne6d+v4A7HIH9EqzVdPLoAaMKXCZUUdKs+j3z1fg==}
+  '@graphql-yoga/subscription@5.0.2':
+    resolution: {integrity: sha512-KGacW1FtUXR5e3qk4YmEFQRGTov8lOkpW7syjTD3EN2t5HRWrSsut2LwjVdK+HcP3H9UEuZ9RXw/+shqV+1exQ==}
     engines: {node: '>=18.0.0'}
 
-  '@graphql-yoga/typed-event-target@3.0.0':
-    resolution: {integrity: sha512-w+liuBySifrstuHbFrHoHAEyVnDFVib+073q8AeAJ/qqJfvFvAwUPLLtNohR/WDVRgSasfXtl3dcNuVJWN+rjg==}
+  '@graphql-yoga/typed-event-target@3.0.1':
+    resolution: {integrity: sha512-SWVkyFivzlDqGTBrGTWTNg+aFGP/cIiotirUFnvwuUGt2gla6UJoKhII6aPoHNg3/5vpUAL1KzyoaXMK2PO0JA==}
     engines: {node: '>=18.0.0'}
 
   '@isaacs/cliui@8.0.2':
@@ -758,8 +758,8 @@ packages:
     resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==}
     engines: {node: '>=8'}
 
-  is-core-module@2.15.1:
-    resolution: {integrity: sha512-z0vtXSwucUJtANQWldhbtbt7BnL0vxiFjIdDLAatwhDYty2bad6s+rijD6Ri4YuYJubLzIJLUidCh09e1djEVQ==}
+  is-core-module@2.16.0:
+    resolution: {integrity: sha512-urTSINYfAYgcbLb0yDQ6egFm6h3Mo1DcF9EkyXSRjjzdHbsulg01qhwWuXdOoUBuTkbQ80KDboXa0vFJ+BDH+g==}
     engines: {node: '>= 0.4'}
 
   is-extglob@2.1.1:
@@ -1071,8 +1071,8 @@ packages:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
 
-  resolve@1.22.8:
-    resolution: {integrity: sha512-oKWePCxqpd6FlLvGV1VU0x7bkPmmCNolxzjMf4NczoDnQcIWrAF+cPtZn5i6n+RfD2d9i0tzpKnG6Yk168yIyw==}
+  resolve@1.22.9:
+    resolution: {integrity: sha512-QxrmX1DzraFIi9PxdG5VkRfRwIgjwyud+z/iBwfRRrVmHc+P9Q7u2lSSpQ6bjr2gy5lrqIiU9vb6iAeGf2400A==}
     hasBin: true
 
   retry@0.13.1:
@@ -1552,14 +1552,14 @@ snapshots:
     dependencies:
       graphql: 16.9.0
 
-  '@graphql-yoga/subscription@5.0.1':
+  '@graphql-yoga/subscription@5.0.2':
     dependencies:
-      '@graphql-yoga/typed-event-target': 3.0.0
+      '@graphql-yoga/typed-event-target': 3.0.1
       '@repeaterjs/repeater': 3.0.6
       '@whatwg-node/events': 0.1.2
       tslib: 2.8.1
 
-  '@graphql-yoga/typed-event-target@3.0.0':
+  '@graphql-yoga/typed-event-target@3.0.1':
     dependencies:
       '@repeaterjs/repeater': 3.0.6
       tslib: 2.8.1
@@ -2164,7 +2164,7 @@ snapshots:
     dependencies:
       binary-extensions: 2.3.0
 
-  is-core-module@2.15.1:
+  is-core-module@2.16.0:
     dependencies:
       hasown: 2.0.2
 
@@ -2421,9 +2421,9 @@ snapshots:
 
   require-directory@2.1.1: {}
 
-  resolve@1.22.8:
+  resolve@1.22.9:
     dependencies:
-      is-core-module: 2.15.1
+      is-core-module: 2.16.0
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 
@@ -2588,7 +2588,7 @@ snapshots:
       dynamic-dedupe: 0.3.0
       minimist: 1.2.8
       mkdirp: 1.0.4
-      resolve: 1.22.8
+      resolve: 1.22.9
       rimraf: 2.7.1
       source-map-support: 0.5.21
       tree-kill: 1.2.2
@@ -2629,7 +2629,7 @@ snapshots:
 
   type-graphql@2.0.0-rc.2(class-validator@0.14.1)(graphql-scalars@1.24.0(graphql@16.9.0))(graphql@16.9.0):
     dependencies:
-      '@graphql-yoga/subscription': 5.0.1
+      '@graphql-yoga/subscription': 5.0.2
       '@types/node': 22.10.2
       '@types/semver': 7.5.8
       graphql: 16.9.0
