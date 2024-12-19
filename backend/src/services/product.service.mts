@@ -4,7 +4,7 @@ import datasource from "../config/datasource.mjs";
 import { Category, Product } from "../entities/index.mjs";
 import { redisClient } from "../index.mjs";
 import { InputCreateProduct, InputUpdateProduct } from "../inputs/index.mjs";
-import CategoryService from "../services/category.service";
+import CategoryService from "./category.service.mjs";
 
 export default class ProductService {
   db: Repository<Product>;

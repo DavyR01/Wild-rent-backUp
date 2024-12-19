@@ -4,7 +4,7 @@ import * as jwt from "jsonwebtoken";
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { User, UserInfo, UserRoleType } from "../entities/user.entity.mjs";
 import { InputUserCreate, InputUserLogin } from "../inputs/index.mjs";
-import { UserService } from "../services/user.service";
+import { UserService } from "../services/user.service.mjs";
 import { validateEmail, validateExistingUser, validatePassword, validateUsername } from "../validators/authUser.validator-back";
 
 // class PasswordValidationError extends Error {
