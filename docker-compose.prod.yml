@@ -27,7 +27,7 @@ services:
     #   dockerfile: Dockerfile.prod
     # restart: always
     # environment:
-    #   - NODE_ENV=development
+    #   - NODE_ENV=production # value development by default
     #   - CHOKIDAR_USEPOLLING=true
     #   - WATCHPACK_POLLING=true
     # env_file: .env.dev
