@@ -1,5 +1,5 @@
 import { Arg, Mutation, Resolver } from "type-graphql";
-import { stripe } from "../index";
+import { stripe } from "../index.mjs";
 import { InputCartProduct } from "../inputs";
 
 @Resolver()

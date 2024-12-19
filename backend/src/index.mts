@@ -13,7 +13,9 @@ import {
 } from "./resolvers/index";
 // import { fillDatabaseIfEmpty } from "./fillDatabaseIfEmpty";
 
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
+// require("dotenv").config();
 
 export const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
