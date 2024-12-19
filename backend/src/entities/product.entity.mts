@@ -9,7 +9,7 @@ import {
    PrimaryGeneratedColumn,
    UpdateDateColumn,
 } from "typeorm";
-import { Category } from "./category.entity.mjs";
+import { Category } from "./index.mjs";
 
 @ObjectType()
 @Entity()
