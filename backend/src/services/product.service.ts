@@ -3,7 +3,7 @@ import { ILike, Repository } from "typeorm";
 import datasource from "../config/datasource.mjs";
 import { Category, Product } from "../entities/index.mjs";
 import { redisClient } from "../index.mjs";
-import { InputCreateProduct, InputUpdateProduct } from "../inputs";
+import { InputCreateProduct, InputUpdateProduct } from "../inputs/index.mjs";
 import CategoryService from "../services/category.service";
 
 export default class ProductService {

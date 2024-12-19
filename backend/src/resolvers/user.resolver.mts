@@ -3,7 +3,7 @@ import * as argon2 from "argon2";
 import * as jwt from "jsonwebtoken";
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { User, UserInfo, UserRoleType } from "../entities/user.entity.mjs";
-import { InputUserCreate, InputUserLogin } from "../inputs";
+import { InputUserCreate, InputUserLogin } from "../inputs/index.mjs";
 import { UserService } from "../services/user.service";
 import { validateEmail, validateExistingUser, validatePassword, validateUsername } from "../validators/authUser.validator-back";
 

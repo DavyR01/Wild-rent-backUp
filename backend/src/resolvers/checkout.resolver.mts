@@ -1,6 +1,6 @@
 import { Arg, Mutation, Resolver } from "type-graphql";
 import { stripe } from "../index.mjs";
-import { InputCartProduct } from "../inputs";
+import { InputCartProduct } from "../inputs/index.mjs";
 
 @Resolver()
 export default class CheckoutResolver {

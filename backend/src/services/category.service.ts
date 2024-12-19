@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 import datasource from "../config/datasource.mjs";
 import { Category } from "../entities/index.mjs";
-import { InputCreateCategory } from "../inputs";
+import { InputCreateCategory } from "../inputs/index.mjs";
 
 export default class CategoryService {
   db: Repository<Category>;
