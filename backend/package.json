@@ -3,7 +3,6 @@
    "version": "1.0.0",
    "description": "",
    "main": "index.js",
-   "type": "commonjs",
    "scripts": {
       "dev": "ts-node-dev --watch ./src src/index.ts",
       "test": "jest",
