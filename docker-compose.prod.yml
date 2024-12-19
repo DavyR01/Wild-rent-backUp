@@ -1,9 +1,10 @@
 services:
   backend:
+    image: davyrobert/wildrent-backend
     # image: wildrent9/wildrent-back
-    build:
-      context: ./backend
-      dockerfile: Dockerfile.prod
+    # build:
+    #   context: ./backend
+    #   dockerfile: Dockerfile.prod
     # ports:
     #   - 4000:4000
     volumes:
@@ -19,10 +20,11 @@ services:
         condition: service_healthy
 
   frontend:
+    image: davyrobert/wildrent-frontend
     # image: wildrent9/wildrent-front
-    build:
-      context: ./backend
-      dockerfile: Dockerfile.prod
+    # build:
+    #   context: ./backend
+    #   dockerfile: Dockerfile.prod
     # restart: always
     environment:
       - NODE_ENV=development
@@ -53,9 +55,10 @@ services:
       - pgdata_new1:/var/lib/postgresql/data
 
   imagesupload:
-    build: 
-      context: ./imagesupload
-      dockerfile: Dockerfile.prod
+    image: davyrobert/wildrent-imagesupload
+    # build: 
+    #   context: ./imagesupload
+    #   dockerfile: Dockerfile.prod
     # build: ./imagesupload
     # image: wildrent9/wildrent-imagesupload
     volumes:
