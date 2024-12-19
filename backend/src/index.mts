@@ -4,7 +4,7 @@ import * as jwt from "jsonwebtoken";
 import { createClient } from "redis";
 import "reflect-metadata";
 import { buildSchema } from "type-graphql";
-import dataSource from "./config/datasource";
+import dataSource from "./config/datasource.mjs";
 import {
    CategoryResolver,
    CheckoutResolver,

@@ -1,6 +1,6 @@
 import { validate } from "class-validator";
 import { ILike, Repository } from "typeorm";
-import datasource from "../config/datasource";
+import datasource from "../config/datasource.mjs";
 import { Category, Product } from "../entities";
 import { redisClient } from "../index.mjs";
 import { InputCreateProduct, InputUpdateProduct } from "../inputs";

@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import datasource from "../config/datasource";
+import datasource from "../config/datasource.mjs";
 import { Category } from "../entities";
 import { InputCreateCategory } from "../inputs";
 
