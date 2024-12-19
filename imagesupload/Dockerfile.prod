@@ -26,7 +26,7 @@ WORKDIR /app
 COPY --from=builder /app/dist/ /app/dist/
 
 COPY package.json package.json
-RUN pnpm i --omit-dev
+RUN pnpm --version && pnpm install --prod
 
 CMD pnpm run startprod
 
