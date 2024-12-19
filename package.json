@@ -17,7 +17,9 @@
       "test:back": "cd backend && pnpm run test",
 
       "delete": "concurrently \"rm -rf node_modules pnpm-lock.yaml\" \"cd frontend && rm -rf node_modules pnpm-lock.yaml\" \"cd backend && rm -rf node_modules pnpm-lock.yaml\" \"cd e2e && rm -rf node_modules pnpm-lock.yaml\" \"cd imagesupload && rm -rf node_modules pnpm-lock.yaml\"",
+      "delete:dist": "concurrently \"rm -rf dist\" \"cd frontend && rm -rf .next\" \"cd backend && rm -rf dist\" \"cd e2e && rm -rf dist\" \"cd imagesupload && rm -rf dist\"",
       "update": "concurrently -n current,backend,frontend -c green,yellow,blue \"ncu -u\" \"cd backend && ncu -u\" \"cd frontend && ncu -u\" \"cd imagesupload && ncu -u\" \"cd e2e && ncu -u\"",
+      "build": "concurrently -n frontend,backend,imagesupload -c green,yellow,blue \" cd frontend && pnpm run build \" \" cd backend && pnpm run build \"  \" cd imagesupload && pnpm run build \"",
 
       "docker:drop": "docker compose exec backend pnpm run typeorm schema:drop",
       "docker:generate": "docker compose exec backend pnpm run migration:generate",
