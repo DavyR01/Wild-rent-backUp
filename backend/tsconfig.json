@@ -1,8 +1,8 @@
 {
    "compilerOptions": {
       "target": "ES2020",
-      // "module": "CommonJS",
-      "module": "ES6", // ou "ESNext"
+      "module": "CommonJS", // Valeur par défaut
+      // "module": "ES6", // ou "ESNext"
       "lib": [
          "dom",
          "esnext.asynciterable"
