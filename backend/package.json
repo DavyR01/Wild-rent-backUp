@@ -7,7 +7,7 @@
       "dev": "ts-node-dev --watch ./src src/index.ts",
       "test": "jest",
       "build": "tsc",
-      "startprod": "node ./dist/index.js",
+      "startprod": "node ./dist/index.mjs",
       "typeorm": "typeorm-ts-node-commonjs -d ./src/database/typeorm-cli.ts",
       "migration:generate": "pnpm run typeorm migration:generate src/database/migrations/migration"
    },
