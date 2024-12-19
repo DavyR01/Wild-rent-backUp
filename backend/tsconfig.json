@@ -40,5 +40,5 @@
    ],
    "include": [
       "./src/**/*.ts"
-, "src/index.mts", "src/config/datasource.mts"   ]
+, "src/index.mts", "src/config/datasource.mts", "src/resolvers/index.mts"   ]
 }
