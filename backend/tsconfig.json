@@ -1,7 +1,8 @@
 {
    "compilerOptions": {
       "target": "ES2020",
-      "module": "CommonJS",
+      // "module": "CommonJS",
+      "module": "ES6", // ou "ESNext"
       "lib": [
          "dom",
          "esnext.asynciterable"
@@ -23,6 +24,7 @@
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "resolveJsonModule": true,
+      "moduleResolution": "node",
       "baseUrl": "./src",
       // "paths": {
 		// 	"@entities": ["entities"],
