@@ -40,5 +40,5 @@
    ],
    "include": [
       "./src/**/*.ts"
-, "src/index.mts", "src/config/datasource.mts", "src/resolvers/index.mts", "src/resolvers/category.resolver.mts", "src/resolvers/checkout.resolver.mts", "src/resolvers/product.resolver.mts", "src/resolvers/user.resolver.mts"   ]
+, "src/index.mts", "src/config/datasource.mts", "src/resolvers/index.mts", "src/resolvers/category.resolver.mts", "src/resolvers/checkout.resolver.mts", "src/resolvers/product.resolver.mts", "src/resolvers/user.resolver.mts", "src/entities/category.entity.mts", "src/entities/checkout.entity.mts", "src/entities/index.mts", "src/entities/product.entity.mts", "src/entities/user.entity.mts"   ]
 }

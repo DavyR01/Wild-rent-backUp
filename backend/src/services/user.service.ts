@@ -1,5 +1,5 @@
 
-import { User } from "../entities/user.entity";
+import { User } from "../entities/user.entity.mjs";
 
 export class UserService {
    // async createUser(inputUserCreate: InputUserCreate): Promise<User> {

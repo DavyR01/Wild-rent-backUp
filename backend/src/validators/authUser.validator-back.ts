@@ -1,5 +1,5 @@
 import { ApolloError } from "apollo-server-errors";
-import { User } from "entities";
+import { User } from "entities/user.entity.mjs";
 
 export function validateEmail(email: string): void {
    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/

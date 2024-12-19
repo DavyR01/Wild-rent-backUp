@@ -1,15 +1,15 @@
 import { IsDate, IsInt, Length, MinLength } from "class-validator";
 import { Field, ID, ObjectType } from "type-graphql";
 import {
-  BaseEntity,
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
+   BaseEntity,
+   Column,
+   CreateDateColumn,
+   Entity,
+   ManyToOne,
+   PrimaryGeneratedColumn,
+   UpdateDateColumn,
 } from "typeorm";
-import { Category } from "./category.entity";
+import { Category } from "./category.entity.mjs";
 
 @ObjectType()
 @Entity()

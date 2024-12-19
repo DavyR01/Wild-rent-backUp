@@ -1,5 +1,5 @@
 import { Arg, Authorized, Mutation, Query, Resolver } from "type-graphql";
-import { Category } from "../entities";
+import { Category } from "../entities/index.mjs";
 import { InputCreateCategory } from "../inputs";
 import CategoryService from "../services/category.service";
 

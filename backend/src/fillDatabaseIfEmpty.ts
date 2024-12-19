@@ -1,5 +1,5 @@
 import * as argon2 from "argon2";
-import { Category, Product, User } from "../src/entities";
+import { Category, Product, User } from "./entities/index.mjs";
 
 export async function fillDatabaseIfEmpty() {
   const adminUser = await User.findOne({ where: { role: "admin" } });
