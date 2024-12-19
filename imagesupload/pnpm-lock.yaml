@@ -36,6 +36,9 @@ importers:
       '@types/express':
         specifier: ^5.0.0
         version: 5.0.0
+      typescript:
+        specifier: ^5.7.2
+        version: 5.7.2
 
 packages:
 

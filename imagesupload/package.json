@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev ./src/index.ts"
+    "dev": "ts-node-dev ./src/index.ts",
+    "build": "tsc",
+    "startprod": "node ./dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +23,7 @@
     "uuid": "^11.0.3"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0"
+    "@types/express": "^5.0.0",
+    "typescript": "^5.7.2"
   }
 }

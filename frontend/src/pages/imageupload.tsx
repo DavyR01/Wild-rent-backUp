@@ -43,7 +43,7 @@ const UploadPage = () => {
 
       {imageURL ? (
         <>
-          {console.log("image URL : ", imageURL)}
+          {/* {console.log("image URL : ", imageURL)} */}
           <br />
           <img width={500} alt="uploadedImg" src={imageURL} />
           <br />

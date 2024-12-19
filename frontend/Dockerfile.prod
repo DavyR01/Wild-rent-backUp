@@ -1,3 +1,5 @@
+# Build and start frontend
+
 ARG NODE_VERSION=20.11.0
 
 FROM node:${NODE_VERSION}-alpine as base
@@ -14,4 +16,8 @@ COPY package.json package.json
 RUN pnpm i
 
 COPY . .
-CMD pnpm run dev
+
+RUN pnpm run build 
+# pnpm run build will build the frontend in a folder .next
+CMD pnpm run start
+# pnpm run start will serve the built folder .next

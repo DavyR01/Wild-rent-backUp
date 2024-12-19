@@ -1,15 +1,32 @@
+# Build imagesupload
 
-FROM node:lts-alpine
+FROM node:lts-alpine as builder
 
+RUN apk add --no-cache libc6-compat curl
 RUN corepack enable pnpm
 RUN corepack prepare pnpm@8.15.4 --activate
 WORKDIR /app
 
 COPY package.json package.json
-COPY tsconfig.json tsconfig.json
+# COPY tsconfig.json tsconfig.json
 
 RUN pnpm i
 RUN pnpm i -D @types/express
 
-COPY src src
-CMD pnpm run dev
+COPY . .
+RUN pnpm run build
+
+# Start imagesupload
+
+FROM node:lts-alpine as runner
+
+RUN apk --no-cache add curl
+
+WORKDIR /app
+COPY --from=builder /app/dist/ /app/dist/
+
+COPY package.json package.json
+RUN pnpm i --omit-dev
+
+CMD pnpm run startprod
+
