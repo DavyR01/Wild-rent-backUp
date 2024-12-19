@@ -14,10 +14,17 @@ import {
 // import { fillDatabaseIfEmpty } from "./fillDatabaseIfEmpty";
 
 import dotenv from "dotenv";
+import Stripe from "stripe";
 dotenv.config();
 // require("dotenv").config();
 
-export const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+if (!stripeSecretKey) {
+   throw new Error("STRIPE_SECRET_KEY is not defined in the environment variables.");
+}
+
+export const stripe = new Stripe(stripeSecretKey);
+// export const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export const redisClient = createClient({
   url: "redis://redis",
