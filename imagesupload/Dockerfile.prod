@@ -20,13 +20,14 @@ RUN pnpm run build
 
 FROM node:lts-alpine as runner
 
-RUN apk --no-cache add curl
-
+RUN apk add --no-cache libc6-compat curl
+RUN corepack enable pnpm
+RUN corepack prepare pnpm@8.15.4 --activate
 WORKDIR /app
 COPY --from=builder /app/dist/ /app/dist/
 
 COPY package.json package.json
-RUN pnpm i --omit-dev
+RUN pnpm --version && pnpm install --prod
 
 CMD pnpm run startprod
 
