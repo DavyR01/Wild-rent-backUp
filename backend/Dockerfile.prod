@@ -15,6 +15,9 @@ RUN pnpm i
 
 COPY . .
 RUN pnpm run build && ls -la /app/dist
+
+RUN pnpm add -D ts2mjs && npx ts2mjs ./dist/*.js
+
 # RUN pnpm run build
 
 # Start backend
