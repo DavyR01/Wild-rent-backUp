@@ -12,10 +12,10 @@ const dataSource = new DataSource({
   username: "postgres",
   password: "wildrent",
   database: "postgres",
-  entities: ["src/entities/*.ts"],
+  entities: ["src/entities/*.mts"],
   synchronize: false,
   logging: ["error", "query"],
-  migrations: ["src/database/migrations/*.ts"], // Déterminer à quel endroit on enregistre les fichiers de migrations afin de pouvoir les relire.
+  migrations: ["src/database/migrations/*.mts"], // Déterminer à quel endroit on enregistre les fichiers de migrations afin de pouvoir les relire.
   //   migrations: [path.join(__dirname, '../database/migrations/*.ts')],
   //   migrations: [Migration1721926264177],
   migrationsRun: true // Assure l'application des migrations non encore appliquées à chaque connexion à la base de données.
