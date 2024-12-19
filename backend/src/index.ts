@@ -10,7 +10,7 @@ import {
    CheckoutResolver,
    ProductResolver,
    UserResolver,
-} from "./resolvers";
+} from "./resolvers/index";
 // import { fillDatabaseIfEmpty } from "./fillDatabaseIfEmpty";
 
 require("dotenv").config();
