@@ -21,6 +21,7 @@ services:
 
   frontend:
     image: davyrobert/wildrent-frontend
+    command: pnpm run start
     # image: wildrent9/wildrent-front
     # build:
     #   context: ./frontend

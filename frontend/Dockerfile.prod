@@ -19,5 +19,5 @@ COPY . .
 
 RUN pnpm run build 
 # pnpm run build will build the frontend in a folder .next
-CMD pnpm run start
+# CMD pnpm run start
 # pnpm run start will serve the built folder .next
