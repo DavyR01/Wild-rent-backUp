@@ -14,20 +14,21 @@ const dataSource = new DataSource({
   password: "wildrent",
   database: "postgres",
 
-  entities: ["dist/entities/*.mjs"],
-//   entities: ["src/entities/*.mjs"],
+//   entities: ["dist/entities/*.mjs"],
+  entities: ["src/entities/*.mjs"],
 
-  synchronize: false, // don't use in production
+  synchronize: false, //! don't use in production
   logging: ["error", "query"],
 
-  migrations: ["dist/database/migrations/*.mjs"],
-//   migrations: ["src/database/migrations/*.mjs"], // Déterminer à quel endroit on enregistre les fichiers de migrations afin de pouvoir les relire.
+//   migrations: ["dist/database/migrations/*.mjs"],
+  migrations: ["src/database/migrations/*.mjs"], //? Déterminer à quel endroit on enregistre les fichiers de migrations afin de pouvoir les relire.
+  
 //   migrations: [path.join(__dirname, '../database/migrations/*.mjs')],
 
 
   //   migrations: [path.join(__dirname, '../database/migrations/*.ts')],
   //   migrations: [Migration1721926264177],
-  migrationsRun: true, // Assure l'application des migrations non encore appliquées à chaque connexion à la base de données.
+  migrationsRun: true, //? Assure l'application des migrations non encore appliquées à chaque connexion à la base de données.
 //   migrationsTableName: "migrations"
 });
 

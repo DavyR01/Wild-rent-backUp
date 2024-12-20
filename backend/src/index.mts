@@ -45,6 +45,7 @@ const start = async () => {
    await dataSource.initialize();
    console.log("Data source initialized");
 
+   console.log("Running migrations...");
    await dataSource.runMigrations();
    console.log("Migrations completed");
 } catch (error) {
