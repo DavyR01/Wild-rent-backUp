@@ -41,6 +41,7 @@ redisClient.on("connect", () => {
 const start = async () => {
   await redisClient.connect();
   await dataSource.initialize();
+  await dataSource.runMigrations();
 
 //   await fillDatabaseIfEmpty();
 
