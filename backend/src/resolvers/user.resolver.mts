@@ -1,6 +1,10 @@
 import { ApolloError } from "apollo-server-errors";
+
 import * as argon2 from "argon2";
-import * as jwt from "jsonwebtoken";
+// import * as argon2 from "argon2";
+import { sign } from "jsonwebtoken";
+// import * as jwt from "jsonwebtoken";
+
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { User, UserInfo, UserRoleType } from "../entities/user.entity.mjs";
 import { InputUserCreate, InputUserLogin } from "../inputs/index.mjs";
@@ -80,7 +84,7 @@ export default class UserResolver {
          if (!user) throw new Error("User not found");
          if (!(await argon2.verify(user.hashedPassword, inputUserLogin.password))) { throw new Error("Invalid password") }
          payload = { email: user.email, role: user.role, username: user.username };
-         const token = jwt.sign(payload, "mysupersecretkey", { expiresIn: '12h' });
+         const token = sign(payload, "mysupersecretkey", { expiresIn: '12h' });
 
          console.log("-------- Token in user.resolver.ts ------- : ", token);
          console.log("------ Payload in user.resolver.ts ------ : ", payload);
