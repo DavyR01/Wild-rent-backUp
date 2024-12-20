@@ -39,6 +39,10 @@
       "node_modules"
    ],
    "include": [
-      "./src/**/*.ts"
-, "src/index.mts", "src/config/datasource.mts", "src/resolvers/index.mts", "src/resolvers/category.resolver.mts", "src/resolvers/checkout.resolver.mts", "src/resolvers/product.resolver.mts", "src/resolvers/user.resolver.mts", "src/entities/category.entity.mts", "src/entities/checkout.entity.mts", "src/entities/index.mts", "src/entities/product.entity.mts", "src/entities/user.entity.mts", "src/inputs/index.mts", "src/inputs/InputCartProduct.mts", "src/inputs/InputCreateCategory.mts", "src/inputs/InputCreateProduct.mts", "src/inputs/InputUpdateProduct.mts", "src/inputs/InputUserCreate.mts", "src/inputs/InputUserLogin.mts", "src/services/category.service.mts", "src/services/product.service.mts", "src/services/user.service.mts", "src/validators/authUser.validator-back.mts", "src/database/migrations/1721926264178-migration.mts", "src/database/migrations/1721926264177-migration.mts", "src/database/typeorm-cli.mts"   ]
+      "./src/**/*.ts",
+      "./src/**/*.mts"
+   ]
+//    "include": [
+//       "./src/**/*.ts"
+// , "src/index.mts", "src/config/datasource.mts", "src/resolvers/index.mts", "src/resolvers/category.resolver.mts", "src/resolvers/checkout.resolver.mts", "src/resolvers/product.resolver.mts", "src/resolvers/user.resolver.mts", "src/entities/category.entity.mts", "src/entities/checkout.entity.mts", "src/entities/index.mts", "src/entities/product.entity.mts", "src/entities/user.entity.mts", "src/inputs/index.mts", "src/inputs/InputCartProduct.mts", "src/inputs/InputCreateCategory.mts", "src/inputs/InputCreateProduct.mts", "src/inputs/InputUpdateProduct.mts", "src/inputs/InputUserCreate.mts", "src/inputs/InputUserLogin.mts", "src/services/category.service.mts", "src/services/product.service.mts", "src/services/user.service.mts", "src/validators/authUser.validator-back.mts", "src/database/migrations/1721926264178-migration.mts", "src/database/migrations/1721926264177-migration.mts", "src/database/typeorm-cli.mts"   ]
 }
