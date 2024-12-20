@@ -1,8 +1,10 @@
 {
    "compilerOptions": {
       "target": "ES2020",
-      "module": "ES6", // Valeur par défaut
-      // "module": "ES6", // ou "ESNext"
+      "module": "Node16",
+      // "module": "ES6", // Valeur par défaut ou "ESNext"
+      "moduleResolution": "node16",
+      // "allowImportingTsExtensions": true,
       "lib": [
          "dom",
          "esnext.asynciterable"
@@ -24,7 +26,6 @@
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "resolveJsonModule": true,
-      "moduleResolution": "node",
       "baseUrl": "./src",
       // "paths": {
 		// 	"@entities": ["entities"],
