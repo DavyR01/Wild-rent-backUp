@@ -2,7 +2,8 @@ import { ApolloError } from "apollo-server-errors";
 
 import * as argon2 from "argon2";
 // import * as argon2 from "argon2";
-import { sign } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
+// import { sign } from "jsonwebtoken";
 // import * as jwt from "jsonwebtoken";
 
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
@@ -18,6 +19,7 @@ import { validateEmail, validateExistingUser, validatePassword, validateUsername
 //    }
 //  }
 
+const {sign} = jwt;
 
 @Resolver()
 export default class UserResolver {
