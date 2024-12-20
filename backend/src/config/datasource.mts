@@ -14,13 +14,13 @@ const dataSource = new DataSource({
   password: "wildrent",
   database: "postgres",
 
-  entities: ["dist/entities/*.mjs"],
+  entities: ["dist/entities/*.js"],
 //   entities: ["src/entities/*.mjs"],
 
   synchronize: false, // don't use in production
   logging: ["error", "query"],
 
-  migrations: ["dist/database/migrations/*.mjs"],
+  migrations: ["dist/database/migrations/*.js"],
 //   migrations: ["src/database/migrations/*.mjs"], // Déterminer à quel endroit on enregistre les fichiers de migrations afin de pouvoir les relire.
 //   migrations: [path.join(__dirname, '../database/migrations/*.mjs')],
 
