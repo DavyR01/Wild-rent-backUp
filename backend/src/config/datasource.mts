@@ -1,7 +1,7 @@
 // import path from "path";
 import { DataSource } from "typeorm";
-// import { Migration1721926264177 } from "../database/migrations/1721926264177-migration";
-// import path from 'path';
+// import { Migration1721926264177 } from "../database/migrations/1721926264177-migration.mjs";
+// import { Migration1721926264178 } from "../database/migrations/1721926264178-migration.mjs";
 
 const dataSource = new DataSource({
   type: "postgres",
@@ -14,14 +14,14 @@ const dataSource = new DataSource({
   password: "wildrent",
   database: "postgres",
 
-//   entities: ["dist/entities/*.mjs"],
-  entities: ["src/entities/*.mjs"],
+  entities: ["dist/entities/*.mjs"],
+//   entities: ["src/entities/*.mjs"],
 
   synchronize: false, //! don't use in production
   logging: ["error", "query"],
 
-//   migrations: ["dist/database/migrations/*.mjs"],
-  migrations: ["src/database/migrations/*.mjs"], //? Déterminer à quel endroit on enregistre les fichiers de migrations afin de pouvoir les relire.
+  migrations: ["dist/database/migrations/*.mjs"],
+//   migrations: ["src/database/migrations/*.mjs"], //? Déterminer à quel endroit on enregistre les fichiers de migrations afin de pouvoir les relire.
   
 //   migrations: [path.join(__dirname, '../database/migrations/*.mjs')],
 
