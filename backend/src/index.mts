@@ -40,8 +40,19 @@ redisClient.on("connect", () => {
 
 const start = async () => {
   await redisClient.connect();
-  await dataSource.initialize();
-  await dataSource.runMigrations();
+
+  try {
+   await dataSource.initialize();
+   console.log("Data source initialized");
+
+   await dataSource.runMigrations();
+   console.log("Migrations completed");
+} catch (error) {
+   console.error("Error during initialization or migration:", error);
+}
+
+//   await dataSource.initialize();
+//   await dataSource.runMigrations();
 
 //   await fillDatabaseIfEmpty();
 
