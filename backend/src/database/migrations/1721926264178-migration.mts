@@ -1,10 +1,11 @@
-import { MigrationInterface, QueryRunner } from "typeorm";
 import argon2 from "argon2";
+import { MigrationInterface, QueryRunner } from "typeorm";
 
 export class Migration1721926264178 implements MigrationInterface {
    name = 'Migration1721926264178'
 
    public async up(queryRunner: QueryRunner): Promise<void> {
+      console.log("Executing migration: Migration1721926264178");
 
 
       // Insérer les données si la base de données est vide

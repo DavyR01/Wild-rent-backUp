@@ -4,6 +4,8 @@ export class Migration1721926264177 implements MigrationInterface {
    name = 'Migration1721926264177'
 
    public async up(queryRunner: QueryRunner): Promise<void> {
+      console.log("Executing migration: Migration1721926264177");
+
       await queryRunner.query(`CREATE TABLE "category" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, CONSTRAINT "PK_9c4e4a89e3674fc9f382d733f03" PRIMARY KEY ("id"))`);
       await queryRunner.query(`CREATE TABLE "product" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "description_short" character varying NOT NULL, "description_long" character varying NOT NULL, "picture" text array NOT NULL, "price_fixed" integer NOT NULL, "price_daily" integer NOT NULL, "discount" integer, "quantity" integer NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "updated_at" TIMESTAMP NOT NULL DEFAULT now(), "categoryId" integer, CONSTRAINT "PK_bebc9158e480b949565b4dc7a82" PRIMARY KEY ("id"))`);
       await queryRunner.query(`CREATE TABLE "checkout" ("id" SERIAL NOT NULL, "createCheckoutSession" character varying NOT NULL, CONSTRAINT "PK_c3c52ebf395ba358759b1111ac1" PRIMARY KEY ("id"))`);
